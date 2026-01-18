@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de usuario: Cómo manejar el robot Alphabot2 desde cero</title>
+<link rel="stylesheet" type="text/css" href="interfazpython.css">
+
+</head>
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-ROS.html">Acceso wiki ROS</a></li>
+    <li><a href="PRINCIPAL-PYTHON.html">Inicio</a></li>
+    <li><a href="Conoce-robot-py.html">Conoce a tu robot</a></li>
+    <li><a href="Configuracion-inicial-py.html">Configuración inicial</a></li>
+    <li><a href="Conexion-py.html">Conexión y control remoto</a></li>
+    <li><a href="Proyectos-py.html">Ejemplos de proyectos</a></li>
+    <li><a href="contacto-py.html">Contacto</a></li>
+  </ul>
+</nav>
+<!-- CONTENIDO -->
+<div class="content" id="content">
+
+   <header class="page-header section fade-in">
+    <h1>Contacto, información y elementos útiles</h1>
+    <p class="page-subtitle"> 
+      Si tienes alguna pregunta, sugerencia o necesitas ayuda adicional, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte a sacar el máximo provecho de tu robot Alphabot2.
+    </p>
+    
+  </header>
+
+  <h2 id="primerp">¿Quiénes somos?</h2>
+  <hr class="separador">
+  <p>
+    Toda esta página nace bajo la necesidad de una web para el aprendizaje en el mundo de la robótica.
+    Bajo la petición de los profesores del departamento de robótica de la UCA, nosotros, un grupo de estudiantes de PINF en Ingeniería informática, hemos desarrollado esta wiki que reúne todo lo necesario para no darte de bruces contra infinidad de información:
+    contamos con el aprendizaje de las partes de Alphabot y ofrecemos enlaces útiles para su ensamblaje; ejemplos en Python para probar el robot y que el salto a ROS no 
+    sea tan brusco; una introducción a ROS y ejemplos de aprendizaje.
+  </p>
+  <p>
+    El proceso de instalación de ROS es engorroso y complicado, por lo que además te ofrecemos una imagen de máquina virtual lista para que la uses. Esta máquina se encuentra en nuestro
+    GitHub, y puedes descargarla directamente aquí: <button class="btn-git" onclick="location.href='https://github.com/jalvarogarciam/Alpha-ROS-learning/tree/main/2.virtual%20machine'"> Descarga la VM</button>
+  </p>
+  <p>
+    Además de tener disponible la máquina virtual, también contamos con más archivos útiles en GitHub, por lo que te animamos a acceder desde el botón de abajo.
+  </p>
+<p>
+  <h2>¿Tienes alguna duda?</h2>
+  <hr class="separador">
+    <p>Puedes contactarnos en el siguiente correo:
+    <a href="mailto:alpharos@gmail.com?Subject=Duda%20uso%20Alphabot">
+      alpharos@gmail.com
+    </a>
+    </p>
+</p>
+  
+    <section>
+    <p>Accede a nuestro GitHub</p>
+    <a href="https://github.com/jalvarogarciam/Alpha-ROS-learning" target="_blank">
+  <img src="Fotos-wiki\Github-desktop-logo-symbol.svg.png" alt="GitHub" width="40" height="40">
+  </a>
+
+  <p></p>
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+
+ 
+  </section>
+  </div>
+
+
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #1b2838; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Python. Todos los derechos reservados.
+    </div>
+  </footer>
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

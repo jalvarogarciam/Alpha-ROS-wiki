@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de usuario: Cómo manejar el robot Alphabot2 desde cero</title>
+<link rel="stylesheet" href="interfazpython.css">
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-ROS.html">Acceso wiki ROS</a></li>
+    <li><a href="PRINCIPAL-PYTHON.html">Inicio</a></li>
+    <li><a href="Conoce-robot-py.html">Conoce a tu robot</a></li>
+    <li><a href="Configuracion-inicial-py.html">Configuración inicial</a></li>
+    <li><a href="Conexion-py.html">Conexión y control remoto</a></li>
+    <li><a href="Proyectos-py.html">Ejemplos de proyectos</a></li>
+    <li><a href="contacto-py.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="content" id="content">
+
+  <!-- HERO -->
+  <section class="hero-section fade-in">
+    <div class="hero-text">
+      <h1 class="page-title">Manual de usuario: Cómo manejar el robot Alphabot2 desde cero</h1>
+      <p class="hero-subtitle">Guía completa para principiantes</p>
+      <button class="btn-campus" onclick="location.href='https://campusvirtual.uca.es/'">
+        Acceso Campus Virtual
+      </button>
+    </div>
+
+    <img src="Fotos-wiki\105140452_SeeedStudio_AlphaBot2RobotKits.webp"
+         alt="Imagen del robot Alphabot2"
+         class="img-robot">
+  </section>
+
+  <!-- INTRODUCCIÓN -->
+  <section>
+    <h2 id="primerp">Introducción</h2>
+    <hr class="separador">
+    <p>
+      Este manual está diseñado para guiar a los usuarios principiantes en el manejo del robot Alphabot2.
+      A través de instrucciones claras y detalladas, aprenderás a configurar, controlar y aprovechar al máximo
+      las capacidades de este robot educativo.
+    </p>
+  </section>
+
+  <!-- CONTENIDO DEL MANUAL -->
+  <section>
+    <h2>Contenido del manual</h2>
+    <hr class="separador">
+    <div class="cuadro">
+      <ul>
+        <li>Conoce a tu robot</li>
+        <li>Configuración inicial del Alphabot2 e instalación</li>
+        <li>Conexión y control remoto</li>
+        <li>Ejemplos de proyectos</li>
+        <li>Contacto</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- OBJETIVOS -->
+  <section>
+    <h2>Objetivos del manual</h2>
+    <hr class="separador">
+    <p>
+    El aprendizaje del AlphaBot2 permite a los estudiantes conocer los componentes principales del robot y comprender sus características básicas. Este primer contacto facilita una mejor comprensión de su estructura y de las funciones que puede realizar.
+
+Durante el proceso formativo, los estudiantes aprenden a configurar el AlphaBot2 para su uso con una Raspberry Pi, siguiendo los pasos necesarios para que el robot funcione correctamente. También se trabajan las técnicas de conexión y control remoto, esenciales para manejar el robot de forma segura y eficaz.
+
+Otro aspecto fundamental es la introducción a la programación en Python, donde los estudiantes adquieren habilidades básicas para controlar el movimiento y el comportamiento del robot. Estos conocimientos se refuerzan mediante proyectos prácticos que permiten aplicar lo aprendido de manera progresiva.
+
+Finalmente, se desarrolla la capacidad de identificar y resolver problemas comunes relacionados con el uso del AlphaBot2, fomentando la autonomía, el razonamiento lógico y el aprendizaje activo en el ámbito de la robótica educativa.
+    </p>
+</section>
+
+  <!-- ENLACES ÚTILES -->
+  <section>
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="site-footer" style="background-color: #1b2838; color: white;">
+    &copy; 2025 Wiki Alphabot2 Python. Todos los derechos reservados.
+  </div>
+</footer>
+
+<!-- SCRIPT SIDEBAR -->
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de usuario: Cómo manejar el robot Alphabot2 desde cero</title>
+<link rel="stylesheet" type="text/css" href="interfazpython.css">
+
+</head>
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-ROS.html">Acceso wiki ROS</a></li>
+    <li><a href="PRINCIPAL-PYTHON.html">Inicio</a></li>
+    <li><a href="Conoce-robot-py.html">Conoce a tu robot</a></li>
+    <li><a href="Configuracion-inicial-py.html">Configuración inicial</a></li>
+    <li><a href="Conexion-py.html">Conexión y control remoto</a></li>
+    <li><a href="Proyectos-py.html">Ejemplos de proyectos</a></li>
+    <li><a href="contacto-py.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="content" id="content">
+
+   <header class="page-header section fade-in">
+    <h1>Conexión y control remoto</h1>
+    <p class="page-subtitle"> 
+      Aprende a conectar y controlar tu Alphabot2 de forma remota
+    </p>
+    
+  </header>
+ 
+    <section>
+      <h2 id="primerp" >AlphaBot2 para Raspberry Pi Zero – PINOUT</h2>
+        <hr class="separador">
+      <p>
+        Conoceremos ahora cómo funciona nuestro robot en detalle, conociendo su conexión.
+      </p>
+      <div class="cuadro">
+        <h3>1. Motores de las ruedas: </h3>
+        <p>Los <b>motores de las ruedas</b> se dividen en dos: el motor izquierdo (A) y el motor derecho (B), realizándose el control de velocidad de cada motor mediante señales PWM.
+            El motor izquierdo utiliza el pin <b>ENA (GPIO6)</b> , mientras que el motor derecho usa el pin <b>ENB (GPIO26)</b>. 
+            Para controlar la dirección de giro, el motor izquierdo emplea los pines <b>AIN1 (GPIO12) y AIN2 (GPIO13)</b>, y el motor derecho utiliza <b>BIN1 (GPIO20) y BIN2 (GPIO21).</b></p>
+      
+      
+        <h3>2.Servo motor:</h3>
+        <p>El <b>servo motor</b> no se conecta directamente a los pines GPIO, sino que se gestiona a través 
+            del <b>controlador PCA9685</b>, el cual se comunica con la Raspberry Pi mediante el <b>bus I2C</b>. Este módulo permite controlar la posición del servo de forma precisa sin sobrecargar la CPU principal.</p>
+     
+        <h3>3.Sensores de distancia ultrasónico:</h3>
+        <p>En cuanto a los <b>sensores de distancia ultrasónicos</b>, 
+            el pin <b>GPIO22</b> se utiliza como <b>Trigger (TRIG)</b> para emitir la señal ultrasónica, 
+            y el pin <b>GPIO27 como Echo (ECHO)</b> para recibir la señal reflejada y calcular la distancia al obstáculo.</p>
+        
+        <h3>4.Sensores de líneas infrarrojos:</h3>
+        <p>Los <b>sensores de línea infrarrojos (IR)</b> emplean un <b>convertidor analógico-digital (ADC) TLC1543</b>
+             para transmitir la información a la Raspberry Pi. Este ADC se comunica mediante el <b>bus SPI</b>, 
+             utilizando los pines <b>GPIO5 (CS), GPIO25 (CLK), GPIO24 (Address) y GPIO23 (DataOut)</b>. Gracias a esta conexión, la Raspberry puede leer los valores analógicos de los sensores de línea y determinar si el robot se encuentra sobre una línea o fuera de ella.</p>
+     
+        <h3>5.Otros componentes:</h3>
+        <p>Además de todos estos componentes fundamentales, el AlphaBot2 incorpora otros componentes de apoyo. El <b>zumbador (buzzer)</b> es uno de ellos, estando controlado mediante el pin <b>GPIO4</b>,
+            pudiendo utilizarse para emitir señales acústicas. También dispone de un <b>LED RGB</b> conectado al <b>GPIO18</b>, que permite generar distintos colores de luz para indicar estados o eventos del sistema.</p>
+      </div>
+        
+    </section>
+    <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+    
+
+    
+  
+
+    
+  </div>
+ <footer>
+    <div style="text-align: center; padding: 20px; background-color: #1b2838; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Python. Todos los derechos reservados.
+    </div>
+  </footer>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

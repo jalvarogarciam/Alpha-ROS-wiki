@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Prueba de movimiento de robot y otros programas</h1>
+      <p class="page-subtitle">
+        Guía paso a paso para probar el movimiento del robot y programas adicionales
+        </p>
+    </header>
+</div>
+
+<section>
+<div class="cuadro a">
+    <h3>Contenido</h3>
+    <p>Tendremos a mano un menú navegable, puesto que esta sección contiene varios apartados con bastante densidad de código.</p>
+    <ul>
+      <li><a href="#prueba-movimiento">Prueba de movimiento de robot</a></li>
+      <li><a href="#teleop">Teleoperación con teclado</a></li>
+      <li><a href="#obstaculos">Prueba con programa para esquivar obstáculos</a></li>
+      <li><a href="#preparacion">Preparación del entorno</a></li>
+      <li><a href="#script">Creación del script</a></li>
+      <li><a href="#permisos">Permisos y compilación</a></li>
+    </ul>
+  </div>
+
+ <h2 id="prueba-movimiento">Prueba de movimiento de robot</h2>
+
+  <hr class="separador">
+
+  
+  <div id="teleop"></div>
+
+  <p>1.- Abre una nueva terminal <strong>(Ctrl + Alt + T).</strong></p>
+
+  <p>2.- Escribe el siguiente comando:</p>
+
+  <div class="cuadro-code">
+    <code>
+      $ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+    </code>
+  </div>
+
+  <p>
+    <em>
+      Explicación: Lanza el nodo de teleoperación que permite controlar el movimiento del robot manualmente usando el teclado.
+    </em>
+  </p>
+
+  <p>3.- Usa las teclas <strong>W/X</strong> para avanzar/retroceder y <strong>A/D</strong> para girar.</p>
+
+  <p>4.- Usa la barra espaciadora o <strong>S</strong> para parar.</p>
+
+  <p>
+    Ten en cuenta que si pulsas muchas veces <strong>W</strong> aumentará su velocidad, lo mismo con <strong>X</strong>. Esto también sucede con <strong>A</strong> y <strong>D</strong>, si pulsaramos muchas veces <strong>A</strong> y tenemos la velocidad en cero el robot dará vueltas sobre sí mismo.
+  </p>
+
+  <h2 id="obstaculos">Prueba con programa para esquivar obstáculos</h2>
+    <hr class="separador">
+
+  <p>
+    IMPORTANTE: Haz Ctrl + C en la terminal de movimiento del robot, si la tienes iniciada, para detener el control manual antes de seguir.
+  </p>
+
+  <h3 id="preparacion">1. Preparación del entorno</h3>
+
+  <p>Crea el directorio de trabajo:</p>
+
+  <div class="cuadro-code">
+    <code>$ mkdir -p ~/catkin_ws/src</code>
+  </div>
+
+  <p>Entra en la carpeta:</p>
+
+  <div class="cuadro-code">
+    <code>$ cd ~/catkin_ws/src</code>
+  </div>
+
+  <p>Inicializa el espacio de trabajo:</p>
+
+  <div class="cuadro-code">
+    <code>$ catkin_init_workspace</code>
+  </div>
+
+  <p>Vuelve a la raíz y compila:</p>
+
+  <div class="cuadro-code">
+    <code>
+      $ cd ~/catkin_ws<br>
+      $ catkin_make
+    </code>
+  </div>
+
+  <p>Carga las variables del entorno:</p>
+
+  <div class="cuadro-code">
+    <code>$ source ~/catkin_ws/devel/setup.bash</code>
+  </div>
+
+  <h3 id="script">2.Creación del script</h3>
+
+  <p>Crea el paquete:</p>
+
+  <div class="cuadro-code">
+    <code>
+      $ cd ~/catkin_ws/src<br>
+      $ catkin_create_pkg robot_scripts rospy std_msgs geometry_msgs gazebo_ros
+    </code>
+  </div>
+
+  <p>Crea la carpeta y el archivo:</p>
+
+  <div class="cuadro-code">
+    <code>
+      $ cd robot_scripts<br>
+      $ mkdir scripts<br>
+      $ cd scripts<br>
+      $ nano obstacle_avoider.py
+    </code>
+  </div>
+
+  <p>
+    Copia el código Python proporcionado anteriormente dentro de este archivo y guarda con <strong>Ctrl+O</strong> y sal con <strong></strong>Ctrl+X</strong>. 
+    Para poder copiar y pegar, necesitas instalar unos complementos en tu máquina virtual. 
+    Abre una terminal y escribe el comando:
+  </p>
+ <div class="cuadro-code">
+    <code>
+        $ sudo apt install build-essential -y
+    </code>
+  </div>
+  <p>
+    Una vez instalado, ve a la barra superior de la ventana de la máquina virtual, pulsa en <strong>Dispositivos &gt; Portapapeles compartido</strong> y selecciona la opción <strong>Bidireccional</strong>. Después, reinicia la máquina virtual.
+  </p>
+
+  <p>
+    Nota: En la terminal, Ctrl+C y Ctrl+V tienen otras funciones. Para copiar y pegar usa el clic derecho del ratón o las teclas Ctrl + Shift + C (copiar) y Ctrl + Shift + V (pegar):
+  </p>
+
+  <div class="cuadro-code">
+    <div class="cuadro-code">
+  <pre><code>
+#!/usr/bin/env python
+
+import rospy
+from geometry_msgs.msg import Twist
+from sensor_msgs.msg import LaserScan
+import time 
+
+# --- CONSTANTES DE CONTROL ---
+LINEAR_SPEED = 0.2    # Velocidad de avance (m/s)
+ANGULAR_SPEED = 0.5   # Velocidad de giro (rad/s)
+OBSTACLE_DISTANCE = 0.5 # Distancia mínima para esquivar (metros)
+
+# RANGOS DE ESCANEO DEL TURTLEBOT3 (LiDAR de 360 grados)
+FRONT_RIGHT_START = 0
+FRONT_RIGHT_END = 30
+FRONT_LEFT_START = 330
+FRONT_LEFT_END = 359
+
+# --- VARIABLES GLOBALES ---
+# Creamos el publicador para enviar comandos de velocidad
+pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+
+
+def shutdown_hook():
+    """
+    Función de parada de emergencia. 
+    Publica el comando de velocidad cero varias veces para garantizar la parada del robot.
+    """
+    rospy.loginfo("Deteniendo el nodo y enviando velocidad cero al robot...")
+    
+    stop_cmd = Twist()
+    stop_cmd.linear.x = 0.0
+    stop_cmd.angular.z = 0.0
+    
+    # Publicar el comando de parada en un bucle para asegurar que llega al robot
+    for _ in range(10): 
+        pub.publish(stop_cmd)
+        time.sleep(0.1) # Esperar 100ms entre publicaciones
+    
+    rospy.loginfo("Parada de emergencia completada.")
+
+
+def scan_callback(data):
+    """
+    Se ejecuta cada vez que el nodo recibe un nuevo mensaje LaserScan en el tema /scan.
+    """
+    # Creamos el objeto Twist para el comando de movimiento
+    move_cmd = Twist()
+    
+    # 1. Obtener los rangos de escaneo frontal 
+    front_scan = data.ranges[FRONT_RIGHT_START:FRONT_RIGHT_END] + data.ranges[FRONT_LEFT_START:FRONT_LEFT_END]
+
+    # 2. Encontrar la distancia más corta válida
+    try:
+        min_distance = min(d for d in front_scan if d > 0.01) 
+    except ValueError:
+        min_distance = 100.0 # Asumir libre si no hay datos válidos
+
+    # 3. Lógica de Decisión (Evasión Reactiva)
+    if min_distance < OBSTACLE_DISTANCE:
+        # OBSTÁCULO DETECTADO: Detener avance y girar
+        rospy.loginfo("¡Obstáculo detectado a %.2f m! Girando..." % min_distance)
+        move_cmd.linear.x = 0.0      # Detener el avance
+        move_cmd.angular.z = ANGULAR_SPEED # Girar
+    else:
+        # CAMINO LIBRE: Avanzar en línea recta
+        move_cmd.linear.x = LINEAR_SPEED # Avanzar
+        move_cmd.angular.z = 0.0     # No girar
+        
+    # 4. Publicar la Velocidad
+    pub.publish(move_cmd)
+
+
+def avoider_node():
+    """
+    Función principal para inicializar el nodo.
+    """
+    rospy.init_node('obstacle_avoider_node', anonymous=True)
+
+    #  REGISTRA LA FUNCIÓN DE PARADA 
+    # Esto llama a shutdown_hook() cuando presionamos Ctrl+C
+    rospy.on_shutdown(shutdown_hook) 
+
+    # Suscribirse al tema del láser
+    rospy.Subscriber('/scan', LaserScan, scan_callback)
+
+    # Mantiene el nodo activo
+    rospy.spin()
+
+
+if __name__ == '__main__':
+    try:
+        avoider_node()
+    except rospy.ROSInterruptException:
+        pass
+
+  </code></pre>
+</div>
+
+  </div>
+
+  <h3 id="permisos">3.- Da permisos de ejecución:</h3>
+
+  <div class="cuadro-code">
+    <code>$ sudo chmod +x ~/catkin_ws/src/robot_scripts/scripts/obstacle_avoider.py</code>
+  </div>
+
+  <p>Recompila:</p>
+
+  <div class="cuadro-code">
+    <code>
+      $ cd ~/catkin_ws<br>
+      $ catkin_make
+    </code>
+  </div>
+
+
+</section>
+
+<a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

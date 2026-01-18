@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de usuario: Cómo manejar el robot Alphabot2 desde cero</title>
+<link rel="stylesheet" type="text/css" href="interfazpython.css">
+
+</head>
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-ROS.html">Acceso wiki ROS</a></li>
+    <li><a href="PRINCIPAL-PYTHON.html">Inicio</a></li>
+    <li><a href="Conoce-robot-py.html">Conoce a tu robot</a></li>
+    <li><a href="Configuracion-inicial-py.html">Configuración inicial</a></li>
+    <li><a href="Conexion-py.html">Conexión y control remoto</a></li>
+    <li><a href="Proyectos-py.html">Ejemplos de proyectos</a></li>
+    <li><a href="contacto-py.html">Contacto</a></li>
+  </ul>
+</nav>
+<!-- CONTENIDO -->
+<div class="content" id="content">
+
+   <header class="page-header section fade-in">
+    <h1>Ejemplos de proyectos</h1>
+    <p class="page-subtitle"> 
+      Guía paso a paso para ejecutar ejemplos prácticos con Alphabot2
+    </p>
+    
+  </header>
+
+    <section>
+      <h2 id="primerp">Guía de ejemplos</h2>
+        <hr class="separador">
+      <p>
+        Para poder descargar los ejemplos, hemos de escribir en la terminal <b>wget https://files.waveshare.com/upload/3/39/AlphaBot2-Demo.zip. </b>
+        Una vez realizado, hemos de descomprimir el archivo .zip con ayuda del comando <b>unzip</b>.
+      </p>
+
+      <div class="cuadro a">
+  <h3>Contenido</h3>
+  <p>Tendremos a mano un menú navegable, puesto que esta sección contiene varios apartados con bastante densidad de código.</p>
+  <ul>
+    <li><a href="#prueba-motores">Prueba de motores</a></li>
+    <li><a href="#joystick">Control con joystick de 5 direcciones</a></li>
+    <li><a href="#infrarrojos-remote">Control remoto infrarrojos</a></li>
+    <li><a href="#deteccion-obstaculos">Detección de obstáculos por infrarrojos</a></li>
+    <li><a href="#ultrasonido">Medición de distancia por ultrasonido</a></li>
+    <li><a href="#led-rgb">Led RGB</a></li>
+    <li><a href="#sensores-seguimiento">Prueba de sensores de seguimiento</a></li>
+    <li><a href="#seguimiento-linea">Seguimiento de línea infrarrojo</a></li>
+    <li><a href="#servo">Servo</a></li>
+    <li><a href="#mjpg-streamer">Software mjpg-streamer para monitorización en tiempo real</a></li>
+    <li><a href="#bottle">Control por bottle</a></li>
+    <li><a href="#control-software">Control remoto mediante software</a></li>
+    <li><a href="#control-bluetooth">Control remoto mediante bluetooth de la raspberry</a></li>
+  </ul>
+</div>
+
+    </section>
+
+    <section>
+      <h3 id="prueba-motores">Prueba de motores:</h3>
+      <hr class="separador">
+      <p>Acceda a la terminal de Linux e introduzca este par de comandos: </p>
+      <div class="cuadro-code">
+        <pre>
+          <code>  
+cd ~/AlphaBot2/python
+sudo python AlphaBot2.py
+          </code>
+        </pre>
+      </div>
+      <p>El robot inteligente avanza cuando se ejecuta el programa, accionando el motor para que gire.</p>
+      <p>Consideramos que la dirección hacia la que apunta la cámara es hacia adelante. Si el Alphabot2 se mueve en la dirección incorrecta, 
+        podemos modificar el cableado del motor o cambiar la configuración de los pines, recomendando la segunda opción. Esto se hará modificando el archivo AlphaBot2.py. Esto lo haremos con el siguiente comando:</p>
+      <div class="cuadro-code">
+        <pre>
+          <code>  
+sudo nano AlphaBot2.py
+          </code>
+        </pre>
+      </div>
+      <p>
+        Si las ruedas izquierdas del robot giran en la dirección incorrecta,
+         deberemos intercambiar los ajustes de ain1 y ain2. Para las ruedas derechas, intercambiaremos los ajustes de bin1 y bin2.
+      </p>
+       <div class="cuadro-code">
+        <pre>
+          <code>  
+def__init__(self, ain1 = 12, ain2 = 13, ena = 6, bin1 = 20, bin2 = 21, enb = 26):
+          </code>
+        </pre>
+      </div>
+    </section>
+    
+
+    <section>
+      <h3 id="joystic">Control con joystick de 5 direcciones:</h3>
+      <hr class="separador">
+    <p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+<div class="cuadro-code">
+    <pre>
+        <code>
+cd ~/AlphaBot2/python
+sudo python Joystick.py
+        </code>
+    </pre>
+</div>
+
+<p>Al pulsar el joystick, suena el zumbador y el motor gira en la dirección indicada. Si las ruedas giran en la dirección incorrecta, 
+  deberá modificar la configuración de los pines correspondientes. Las direcciones pulsadas también se imprimen en el terminal.</p>
+
+  <img src="Fotos-wiki\joystickjpeg.jpeg" alt="Pin joystick Alphabot" height="320px" width="auto">
+</section>
+
+
+
+<section>
+<h3 id="infrarrojos-remote">Control remoto infrarrojos:</h3>
+<hr class="separador">
+<p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+<div class="cuadro-code">
+    <pre>
+        <code>
+cd ~/AlphaBot2/python
+sudo python IRremote.py
+        </code>
+    </pre>
+</div>
+
+<p>Puedes controlar el robot inteligente pulsando las teclas numéricas del mando a distancia por infrarrojos:</p>
+
+<ul>
+    <li>«2» para avanzar</li>
+    <li>«8» para retroceder</li>
+    <li>«4» para girar a la izquierda</li>
+    <li>«6» para girar a la derecha</li>
+    <li>«5» para detenerse</li>
+    <li>«-» y «+» para ajustar la velocidad</li>
+    <li>«EQ» restablece la velocidad predeterminada</li>
+</ul>
+
+<p>(Nota: La codificación de las teclas puede variar con diferentes mandos a distancia por infrarrojos. Puede modificar el programa.)</p>
+<img src="Fotos-wiki\sudo-IR.jpeg" alt="IR Remote" height="320px" width="auto">
+</section>
+
+<section>
+<h3 id="deteccion-obstaculos">Detección de obstáculos por infrarrojos:</h3>
+<hr class="separador">
+<p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+<div class="cuadro-code">
+    <pre>
+        <code>
+cd ~/AlphaBot2/python
+sudo python Infrarrojos_Obstacle_Avoidance.py
+        </code>
+    </pre>
+</div>
+
+<p>Si no hay obstáculos delante del robot, el LED verde estará apagado. Si se detectan obstáculos, el LED verde se encenderá. En caso de que el LED permanezca siempre apagado o siempre encendido, puede intentar ajustar los potenciómetros situados en la parte inferior del robot para que funcione correctamente.</p>
+
+<p>El robot avanza en línea recta cuando el sensor de la izquierda no detecta ningún obstáculo, y gira a la derecha cuando detecta un obstáculo.</p>
+<img src="Fotos-wiki\sensor.jpeg" alt="Sensores Alphabot" height="320px" width="auto">
+</section>
+<section>
+<h3 id="ultrasonido">Medición de distancia por ultrasonido:</h3>
+ <hr class="separador">
+<p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+<div class="cuadro-code">
+    <pre>
+        <code>
+cd ~/AlphaBot2/python
+sudo python Ultrasónico_Ranging.py
+        </code>
+    </pre>
+</div>
+
+<p>El terminal imprime la distancia medida actualmente.</p>
+<img src="Fotos-wiki\sensorinfra.jpeg" alt="Sensor ultrasonido Alphabot" height="320px" width="auto">
+<img src="Fotos-wiki\sudo-ultra.jpeg" alt="sudo ultrasonic" height="220px" width="auto">
+<p></p>
+<p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+<div class="cuadro-code">
+    <pre>
+        <code>
+cd ~/AlphaBot2/python
+sudo python Infrarrojos_Obstacle_Avoidance.py
+        </code>
+    </pre>
+</div>
+
+<p>El robot avanza en línea recta cuando no detecta ningún obstáculo y gira a la derecha cuando detecta un obstáculo.</p>
+
+</section>
+
+<section>
+    <h3 id="led-rgb">Led RGB:</h3>
+ <hr class="separador">
+    <p>Descarga rpi_ws281x-master.zip a tu Raspberry Pi y ejecuta el siguiente comando para extraer el archivo.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+          cd
+          wget https://files.waveshare.com/upload/c/c3/Rpi_ws281x-master.zip
+
+        </code></pre>
+    </div>
+
+    <p>Descomprime rpi_ws281x-master.zip</p>
+
+    <p>Instala el software necesario.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo apt-get install build-essential python-dev scons swig -y
+
+        </code></pre>
+    </div>
+
+    <p>Compile el programa.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/rpi_ws281x-master
+sudo scons
+
+        </code></pre>
+    </div>
+
+    <p>Ejecuta el siguiente comando para realizar la prueba; podrás ver el LED RGB parpadeando.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo ./test
+
+        </code></pre>
+    </div>
+
+    <p>Pulse Ctrl + C para detener el programa</p>
+
+    <p>Introduzca los siguientes comandos para instalar la biblioteca python.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd python
+sudo python setup.py install
+
+        </code></pre>
+    </div>
+
+    <p>Ejecuta la biblioteca de Python para realizar pruebas y podrás ver el LED RGB parpadeando.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+ejemplos de CD
+sudo python lowlevel.py
+
+        </code></pre>
+    </div>
+
+    <p>Pulse Ctrl + C para detener el programa</p>
+
+    <p>Introduzca los siguientes comandos:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/python
+sudo python ws2812.py
+
+        </code></pre>
+    </div>
+
+    <p>Los cuatro LED RGB de la parte inferior del robot inteligente se iluminarán en rojo, verde, azul y amarillo, respectivamente. Luego se apagarán.</p>
+
+    <p>Si se muestra un color incorrecto, busque el archivo /boot/config.txt y añada las siguientes líneas. Reinicie el módulo para que los cambios surtan efecto. El LED RGB utiliza control DMA, que puede ocupar los canales DMA de salida de audio de la Raspberry Pi. Por lo tanto, añadir estas líneas podría provocar que la interfaz de auriculares quede inhabilitada.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+hdmi_force_hotplug=1
+hdmi_force_edid_audio=1
+
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h3 id="sensores-seguimiento">Prueba de sensores de seguimiento:</h3>
+     <hr class="separador">
+    <p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/python
+sudo python TRSensors.py
+
+        </code></pre>
+    </div>
+
+    <p>En la terminal se muestran cinco conjuntos de datos, correspondientes a cinco sensores. Cuando el robot inteligente se coloca sobre la placa blanca KT, el valor de los datos estará entre 800 y 900. Al suspenderlo en el aire, el valor oscilará entre 0 y 100. Y al situarse sobre la línea negra, el valor se situará entre 100 y 300.</p>
+</section>
+
+<section>
+    <h3 id="seguimiento-linea">Seguimiento de línea infrarrojo:</h3>
+ <hr class="separador">
+    <p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/python
+sudo python Line_Follow.py
+
+        </code></pre>
+    </div>
+
+    <p>Mientras el programa se ejecuta, el robot inteligente entra en modo de calibración, moviéndose primero a la izquierda y luego a la derecha. Una vez finalizada la calibración, puedes balancear el robot de lado a lado y la pantalla mostrará la posición actual de la línea negra y los valores de cinco sensores. Coloca el robot inteligente sobre la línea negra y pulsa el botón central del joystick. Ahora podrás ver cómo el robot se desplaza a lo largo de la línea negra y los LED RGB de su parte inferior muestran diferentes colores.</p>
+</section>
+
+<section>
+    <h3 id="servo">Servo:</h3>
+ <hr class="separador">
+    <p>Acceda a la terminal de Linux e introduzca los siguientes comandos:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/python
+sudo python PCA9685.py
+
+        </code></pre>
+    </div>
+
+    <p>El servo se moverá hacia la izquierda y hacia la derecha, su rango de rotación puede alcanzar los 180 grados.</p>
+</section>
+
+<section>
+    <h3 id="mjpg-streamer">Software mjpg-streamer para monitorización en tiempo real:</h3>
+ <hr class="separador">
+    <p>"MJPG-streamer" toma archivos JPGE de la cámara web y los transmite a través de una red basada en IP a varios tipos de espectadores.</p>
+
+    <ol>
+        <li>
+            Para la cámara con interfaz CSI, es posible que el sistema no pueda detectar el dispositivo en el directorio /dev/video0. En este caso, debe agregar la línea bcm2835-v4l2 al archivo /etc/modules.
+            <p></p>
+            <div class="cuadro-code">
+                <pre><code>
+sudo nano /etc/modules
+
+                </code></pre>
+            </div>
+
+            <p>Añade la línea:bcm2835-v4l2</p>
+        </li>
+
+        <li>
+            Tras reiniciar, el sistema cargará el nombre del módulo almacenado en este archivo y encontrará el dispositivo video0 en el directorio /dev. (Tenga en cuenta que la letra l en el comando bcm2835-v4l2 es la letra L minúscula).  
+            Si aún no puede encontrar el dispositivo video0 en el directorio /dev, y todas las operaciones y comandos son correctos, debe ejecutar el comando: rpi-update.
+        </li>
+    </ol>
+
+    <p>El software mjpg-streamer incluido en el programa ya está compilado. Solo necesita ejecutar las siguientes líneas para iniciar mjpg-streamer:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/mjpg-streamer/mjpg-streamer-experimental/
+sudo ./start.sh
+
+        </code></pre>
+    </div>
+
+    <p>A continuación, abre el navegador e introduce la dirección IP de la Raspberry Pi y el número de puerto: 8080 en la barra de direcciones. El sitio web mostrará la información sobre el transmisor M-JPEG. Haz clic en la opción «Transmitir» para visualizar en tiempo real la imagen capturada por la cámara.</p>
+</section>
+
+<section>
+    <h3 id="bottle">Control por bottle:</h3>
+ <hr class="separador">
+    <p>Bottle es un framework web de micro Python basado en WSGI, sencillo pero eficiente. Con Bottle, podemos controlar Alphabot2 mediante la web.</p>
+
+    <p>Instalar botella</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd
+sudo apt-get install python-bottle -y
+        </code></pre>
+    </div>
+
+    <p>Frasco de prueba  
+    Ejecuta los siguientes comandos para probar la botella.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/Web-RGB/
+sudo python main.py
+        </code></pre>
+    </div>
+<p></p>
+    <img src="Fotos-wiki\ip.jpeg" alt="Putty IP" height="320px" width="auto">
+    <p>Abre el navegador en tu smartphone (no disponible en PC) e introduce la dirección IP de la Pi con el subfijo 8002. Por ejemplo: 192.168.6.234:8002 (la dirección puede ser cambiable según tus circunstancias), luego podrás acceder a la web, simplemente toca el panel táctil para controlar el color del LED.</p>
+
+    <p>Control Alphabot2  
+    Pulsa Ctrl + C para detener el último programa  
+    Introduzca los siguientes comandos para ejecutar el programa de control web.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/Web-Control/
+sudo python main.py
+        </code></pre>
+    </div>
+
+    <p>Abre el navegador de tu smartphone o PC (te recomendamos usar el navegador Chrome), escribe la dirección IP de la Raspberry Pi con el subfijo 8000. Por ejemplo: 192.168.6.234:8000  
+    Acceda al panel de control web y podrá controlar el motor y la cámara mediante botones virtuales.</p>
+
+    <img src="Fotos-wiki\robotweb.jpeg" alt="Interfaz Alphabot Robot Web" height="320px" width="auto">
+    <p>Puedes configurar el programa para que se inicie al arrancar el sistema. Abre el archivo /etc/rc.local con tu editor y añade la siguiente línea.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo vi /etc/rc.local
+        </code></pre>
+    </div>
+
+    <p>Agrega los comandos que siguen a los comentarios. Asegúrate de que la línea `exit 0` sea la última. Guarda los cambios y sal.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/mjpg-streamer/mjpg-streamer-experimental/
+sudo ./start.sh &
+cd ~/AlphaBot2/Web-Control
+sudo python main.py &
+        </code></pre>
+    </div>
+
+    <p>Dado que la Raspberry Pi utiliza una IP dinámica que puede cambiar cada vez que se reinicia el dispositivo, puede agregar las siguientes líneas en el directorio /etc/dhcpcd.comf para configurar la IP estática:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+interfaz wlan0
+dirección_ip_estática = 192.168.6.234/24
+enrutadores estáticos = 192.168.6.1
+        </code></pre>
+    </div>
+
+    <p>“192.168.6.1” es la dirección IP del enrutador y “192.168.6.234” es la dirección IP que se debe configurar, después de lo cual no se debe eliminar el “/24”.</p>
+</section>
+
+<section>
+    <h3 id="control-software">Control remoto mediante software:</h3>
+ <hr class="separador">
+    <p>Para implementar el control por vídeo del robot inteligente mediante el software de su teléfono móvil o PC, primero debe modificar la dirección IP en el programa.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/App-Control
+sudo python main.py
+        </code></pre>
+    </div>
+
+    <p>Abre una nueva terminal para ejecutar el script mjpg-streamer.  
+    Ejecute el programa AlphaBot.exe en su PC e ingrese la dirección IP, los números de puerto de mjpg-streamer (8080) y del servidor Socket del robot inteligente (8000).</p>
+
+    <p>Haz clic en el botón «Conectar vídeo» para conectarte al vídeo. Cuando se establezca la conexión, el botón se pondrá verde. A continuación, haz clic en el botón «Conectar comandos» para conectarte al servidor del robot inteligente. Si la conexión se realiza correctamente, el botón también se pondrá verde. Ahora puedes controlar el robot inteligente pulsando las teclas de la izquierda y controlar la cámara y la dirección con las teclas de la derecha.</p>
+<img src="Fotos-wiki\motorcontrol.jpeg" alt="Control Robot Alphabot y Servo" height="320px" width="auto">
+    <p>A continuación, escanea el código QR que aparece a continuación con tu teléfono móvil y descarga la aplicación correspondiente.</p>
+<img src="Fotos-wiki\qr.jpeg" alt="Qr App" height="320px" width="auto">
+    <p>Introduce la dirección IP de la Raspberry Pi y haz clic en el botón Conectar. Verás las imágenes capturadas por la cámara. A continuación, haz clic en el botón Conectar debajo de la imagen. Cuando el puerto de control se haya conectado al programa, este botón cambiará de verde a azul. Ahora puedes controlar las acciones del robot inteligente y su dirección pulsando las teclas correspondientes. Deslizando el control deslizante, puedes cambiar la velocidad del robot.</p>
+
+    <p>Abre el archivo /etc/rc.local con tu editor para añadir los siguientes comandos:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo nano /etc/rc.local
+        </code></pre>
+    </div>
+
+    <p>Agrega los comandos que siguen a los comentarios. Asegúrate de que la línea `exit 0` sea la última. Guarda los cambios y sal.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd /home/pi/AlphaBot/mjpg-streamer/mjpg-streamer-experimental/
+sudo ./start.sh &
+cd /home/pi/AlphaBot/App-Control
+sudo python main.py &
+        </code></pre>
+    </div>
+
+    <p>Deberás conectar la Raspberry Pi al router cada vez que la reinicies. También puedes habilitar la función de punto de acceso (AP) del adaptador de red inalámbrica de la Raspberry Pi, configurándola como servidor. Para obtener más información sobre su funcionamiento, consulta el tutorial de Raspberry Pi.</p>
+</section>
+
+<section>
+    <h3 id="control-bluetooth">Control remoto mediante bluetooth de la raspberry:</h3>
+ <hr class="separador">
+    <p>1) Actualice los paquetes correspondientes de Bluetooth e instale el software del que depende.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt-get install pi-bluetooth bluez bluez-firmware blueman -y
+        </code></pre>
+    </div>
+
+    <p>2) Agregue el usuario pi al grupo Bluetooth.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo usermod -G Bluetooth -a pi
+        </code></pre>
+    </div>
+
+    <p>3) Reinicie la Raspberry Pi.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo reboot
+        </code></pre>
+    </div>
+
+    <p>4) Inicie/Agregue el SPP y encienda el dispositivo Bluetooth.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo nano /etc/systemd/system/dbus-org.bluez.service
+        </code></pre>
+    </div>
+
+    <p>Modifique dos líneas en el siguiente archivo:</p>
+    <img src="Fotos-wiki\cambiar.jpeg" alt="Cambios Bluetooth" height="320px" width="auto">
+    <p>Después de reiniciar la RPi, ingrese el comando hciconfig (similar al comando ifconfig) para verificar el servicio Bluetooth.</p>
+    <img src="Fotos-wiki\hciconfig.jpeg" alt="Sudo hciconfig" height="220px" width="auto">
+    <p>Si el Bluetooth funciona correctamente, verá el dispositivo hci0 en la pantalla. Si el Bluetooth no funciona, no se detectará ningún dispositivo Bluetooth.  
+    Nota: Si la línea dtoverlay=pi3-miniuart-bt existe en el archivo /boot/config.txt, debe comentarse.</p>
+
+    <p>5) Conéctese al dispositivo Bluetooth  
+    Ingrese el siguiente comando para ingresar a la interfaz de control de Bluetooth (puede ingresar el comando help para consultar la lista de comandos después de ingresar a la interfaz).</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+sudo bluetoothctl
+        </code></pre>
+    </div>
+
+    <p>Una vez dentro de la interfaz, introduzca las siguientes líneas (puede utilizar el comando help para consultar la lista de comandos tras acceder a la interfaz).</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+agente en
+agente predeterminado
+        </code></pre>
+    </div>
+
+    <p>Tras ejecutar el comando scan on, podrá ver la dirección física del dispositivo Bluetooth escaneado, similar a  
+    XX:XX:XX:XX:XX:XX.</p>
+
+    <img src="Fotos-wiki\bluetoothctl.jpeg" alt="Búsqueda Bluetooth" height="320px" width="auto">
+    <p>Para el emparejamiento Bluetooth, utilice el siguiente comando:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+par XX:XX:XX:XX:XX:XX
+        </code></pre>
+    </div>
+<p></p>
+    <img src="Fotos-wiki\pair.jpeg" alt="Pair Terminal" height="120px" width="auto">
+    <p>
+    </p>
+<img src="Fotos-wiki\confirmation.jpeg" alt="Confirmación Bluetooth" height="320px" width="auto">
+    <p></p>
+    <p>Cuando el emparejamiento se haya realizado correctamente, agregue el dispositivo a la lista de dispositivos de confianza.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+confianza XX:XX:XX:XX:XX:XX
+        </code></pre>
+    </div>
+<p></p>
+    <img src="Fotos-wiki\trust.jpeg" alt="Trust Mac" height="120px" width="auto">
+    <p></p>
+    <p>A continuación, conéctese al dispositivo.</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+Conectar XX:XX:XX:XX:XX:XX
+        </code></pre>
+    </div>
+    <p></p>
+    <img src="Fotos-wiki\connect.jpeg" alt="Connect MAC" height="220px" width="auto">
+
+    <p>Finalmente, introduce el comando «quit» para salir de la interfaz. Tras realizar los ajustes anteriores, al encender el dispositivo Bluetooth, la Raspberry Pi se conectará automáticamente a él.  
+    Nota: Si no puede establecer la conexión mediante la línea de comandos, puede acceder a la interfaz gráfica para realizar la conexión.</p>
+
+
+    <img src="Fotos-wiki\add-device.jpeg" alt="Add Device" height="320px" width="auto">
+    <p>Haz clic en el icono de Bluetooth y añade un nuevo dispositivo.</p>
+<img src="Fotos-wiki\note5.jpeg" alt="Add device Note5" height="320px" width="auto">
+    <p>Seleccione el dispositivo Bluetooth correspondiente. Asegúrese de que el Bluetooth de su teléfono móvil esté activado y configurado como visible.</p>
+<img src="Fotos-wiki\pairing.jpeg" alt="Pairing Device" height="220px" width="auto">
+    <p>En la RPi, seleccione la opción Aceptar para emparejar. Y al mismo tiempo, en el teléfono móvil, pulse la opción Emparejar.</p>
+
+    <p>A continuación, es posible que vea un mensaje que dice: “Emparejamiento realizado correctamente, pero este dispositivo no tiene servicios que se puedan usar con Raspberry Pi”.  
+    Haz clic en Aceptar.  
+    Ahora, la conexión se ha establecido.</p>
+
+    <p>Ejecute los siguientes comandos para iniciar el programa:</p>
+
+    <div class="cuadro-code">
+        <pre><code>
+cd ~/AlphaBot2/Bluetooth-Control
+sudo rfcomm watch hci0 1 python bluetooth.py
+        </code></pre>
+    </div>
+
+    <p>A continuación, escanea el código QR que aparece más abajo con tu teléfono móvil y descarga la aplicación correspondiente. (Este es el software para controlar el módulo Bluetooth de modo dual. Si ya tienes instalado este software en tu teléfono móvil Arduino, puedes omitir este paso).  
+    Inicie la aplicación y haga clic en la opción Escanear. (Nota: asegúrese de que el Bluetooth de su teléfono móvil esté activado). Normalmente, verá los dispositivos Bluetooth disponibles en la lista. A continuación, seleccione la opción «raspberrypi». Vaya a la siguiente página y seleccione la opción Control remoto.</p>
+<img src="Fotos-wiki\controlmovil.jpeg" alt="App movil" height="320px" width="auto">
+
+<p>Si no se puede encontrar el Bluetooth de la Raspberry Pi, puede ejecutar las siguientes líneas para habilitar el Bluetooth y configurarlo como detectable.
+</p>
+
+<img src="Fotos-wiki\quit.jpeg" alt="Quit Bluetooth" height="320px" width="auto">
+</section>
+
+
+    <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+  </div>
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #1b2838; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Python. Todos los derechos reservados.
+    </div>
+  </footer>
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

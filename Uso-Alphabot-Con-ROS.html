@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Uso de Alphabot2 con ROS</h1>
+        <p class="page-subtitle">
+             Guía paso a paso para probar el movimiento del robot y programas adicionales
+        </p>
+    </header>
+</div>
+
+<div class="cuadro a">
+    <h3>Contenido</h3>
+    <p>Tendremos a mano un menú navegable, puesto que esta sección contiene varios apartados con bastante densidad.</p>
+    <ul>
+      <li><a href="#primerp">Comparación entre programa con ROS y Python</a></li>
+      <li><a href="#pasos">Pasos genéricos en todos los programas de ROS</a></li>
+      <li><a href="#remoto">Remote Control</a></li>
+      <li><a href="#sensor-ultrasonido">Sensor de ultrasonido</a></li>
+      <li><a href="#sensor-infrarrojo">Sensor infrarrojo</a></li>
+      <li><a href="#led">LED</a></li>
+    </ul>
+  </div>
+
+<section>
+  <h2 id="primerp">Comparación entre programa con <strong>ROS</strong> y con <strong>python</strong>.</h2>
+    <hr class="separador">
+  <p>
+    La diferencia principal en ejecutar un programa con <strong>ROS</strong> y otro sin ROS radica en que con ROS la orden no va directa al <strong>Hardware</strong>, sino que este publica el valor obtenido por los sensores a la <strong>red de ROS</strong>, al contrario de ejecutarlo sin ROS en el que tenemos una orden directa al Hardware.
+  </p>
+
+  <p>
+    Aquí dejamos algunos <strong>consejos/comparativa</strong> al empezar usar ROS una vez tenemos el código de python hecho.
+  </p>
+
+  <h2 id="pasos"><strong>Pasos genéricos en todos los programas de ROS.</strong></h2>
+  <hr class="separador">
+
+  <h3>Identificarse (El <strong>init_node</strong>)</h3>
+
+  <p>
+    Antes de hacer nada, tienes que insertar esta línea que ves en tu segundo código:
+  </p>
+
+  <div class="cuadro-code">
+    <code>rospy.init_node('nombre', anonymous=True)
+</code>
+  </div>
+
+  <p>
+    Le dice al sistema central (<strong>roscore</strong>): "Hola, soy un programa nuevo. Me llamo 'remoto'. Déjame entrar en la red".
+  </p>
+
+  <h2 id="remoto"><strong>REMOTE CONTROL</strong></h2>
+    <hr class="separador">
+
+  <h3>1.Cambiar las Herramientas (Los <strong>Imports</strong>)</h3>
+
+  <ul>
+    <li>Lo primero es cambiar la caja de herramientas.</li>
+        <ul> 
+            <li>En el código viejo: Necesitabas <strong>AlphaBot2</strong> porque ibas a mover ruedas.</li>
+            <li>En el código nuevo (<strong>ROS</strong>): Borras AlphaBot2. En su lugar, traes las herramientas de comunicación de ROS.</li>
+        </ul>
+  </ul>
+
+  <pre class="cuadro-code"><code>
+# BORRAMOS:
+# from AlphaBot2 import AlphaBot2  <-- Ya no movemos ruedas aquí
+# Ab = AlphaBot2()                 <-- Ya no existe el objeto robot
+
+# AÑADIMOS:
+import rospy                   # <-- La herramienta principal de ROS
+from std_msgs.msg import Int32 # <-- El tipo de carta que vamos a enviar(enteros)
+</code></pre>
+
+  <h3>2.Instalar el "<strong>Micrófono</strong>" (El <strong>Publisher</strong>)</h3>
+
+  <p>
+    En el código viejo, no necesitas comunicarte con nadie. En el nuevo, necesitas crear un canal de radio.
+  </p>
+
+  <div class="cuadro-code">
+    <code>pub = rospy.Publisher('/remoto_valor', Int32, queue_size=10)
+</code>
+  </div>
+
+  <ul>
+    <li><strong>pub</strong> = ...: Creamos el objeto micrófono.</li>
+    <li><strong>'/remoto_valor'</strong>: Es el nombre del canal (Topic). Quien quiera escucharnos, tendrá que sintonizar este nombre exacto.</li>
+    <li><strong>Int32</strong>: Es el idioma. Prometemos enviar solo números enteros. No enviaremos texto ni imágenes por aquí.</li>
+  </ul>
+
+  <h3>3.Crear el "<strong>Mensajero</strong>" (La función <strong>valor_remoto</strong>)</h3>
+
+  <p>
+    Función intermedia que coge el dato y lo mete en el micrófono creado anteriormente.
+  </p>
+
+  <pre class="cuadro-code"><code>
+def valor_remoto(valor):
+    msg = Int32()      # 1. Cogemos un sobre vacío tipo "Entero"
+    msg.data = valor   # 2. Metemos el código de la tecla dentro del sobre
+    pub.publish(msg)   # 3. Enviamos el sobre por el micrófono 'pub'
+</code></pre>
+
+  <h3>4.La <strong>Lobotomía</strong> (El bucle principal)</h3>
+
+  <p>
+    Ahora olvidamos el poder físico que teníamos anteriormente sobre el robot y sustituiremos las órdenes por llamadas a los mensajeros:
+  </p>
+
+  <pre class="cuadro-code"><code>
+# Primero, enviamos el dato a la red ROS:
+if isinstance(key, int):   	← Comprobamos que es un entero.
+    valor_remoto(key)  		# <--- ¡LLAMADA AL MENSAJERO! (Mira el Paso 4)
+
+# Luego, solo imprimimos texto para que sepamos qué pasa:
+if key == 0x18:
+print("Avanzar")   		# <--- Solo texto, el robot NO se mueve con esto.
+</code></pre>
+
+</section>
+
+<section>
+
+  <h2 id="sensor-ultrasonido"><strong>SENSOR ULTRASÓNICO</strong></h2>
+<hr class="separador">
+  <h3>1. Cambiar las Herramientas (Los <strong>Imports</strong>)</h3>
+
+  <ul>
+    <li>En el código viejo: Solo necesitas herramientas para controlar pines (<strong>GPIO</strong>) y el tiempo.</li>
+    <li>En el código nuevo (<strong>ROS</strong>): Mantienes los pines, pero necesitas las herramientas de comunicación.</li>
+  </ul>
+
+  <p><strong>AÑADIMOS:</strong></p>
+
+  <pre class="cuadro-code"><code>import rospy                  # <-- La herramienta principal de ROS
+from std_msgs.msg import Float32 # <-- El tipo de carta (Números con decimales)
+</code></pre>
+
+  <h3>2. Instalar el "<strong>Micrófono</strong>" (El <strong>Publisher</strong>)</h3>
+
+  <p>
+    En el código viejo, la distancia se quedaba atrapada en tu pantalla. En el nuevo, necesitas un canal de radio para publicar las distancias del sensor.
+  </p>
+
+  <div class="cuadro-code">
+    <code>self.distance_publisher = rospy.Publisher('/ultrasonido_distancia', Float32, queue_size=1)
+</code>
+  </div>
+
+  <ul>
+    <li><strong>self.distance_publisher</strong> = ...: Creamos el objeto micrófono.</li>
+    <li><strong>'/ultrasonido_distancia'</strong>: Es el nombre del canal (Topic). El robot de navegación sintoniza este nombre para saber si va a chocar.</li>
+    <li><strong>Float32</strong>: Es el idioma. Prometemos enviar números con decimales.</li>
+    <li><strong>queue_size=1</strong>: Importante. Solo guardamos el último dato. Si el dato es viejo, lo tiramos a la basura (no nos importa dónde estaba el obstáculo hace 2 segundos, nos importa ahora).</li>
+  </ul>
+
+  <h3>3. Crear el "<strong>Mensajero</strong>" (La función <strong>dist_sensor</strong>)</h3>
+
+  <p>
+    Es la función encargada de meter el cálculo matemático dentro del sobre de ROS y enviarlo.
+  </p>
+
+  <pre class="cuadro-code"><code>def dist_sensor(self, dist):
+    data_dist = Float32()          # 1. Cogemos un sobre vacío tipo "Float32"
+    data_dist.data = dist          # 2. Metemos la distancia calculada (ej: 25.4) dentro
+    self.distance_publisher.publish(data_dist) # 3. Enviamos el sobre por el micrófono
+</code></pre>
+
+  <h3>5. La <strong>Lobotomía</strong> (El bucle principal)</h3>
+
+  <ul>
+    <li>En el código viejo: Hacías el cálculo y <strong>time.sleep(1)</strong>. Era lento y bloqueante.</li>
+    <li>En el código nuevo: El bucle ahora tiene tres misiones críticas:</li>
+  </ul>
+
+  <ul>
+    <li><strong>Medir</strong>: (Las líneas de gpio.output y pulse_duration son pura física del sensor).</li>
+    <li><strong>Llamada al mensajero:</strong></li>
+  </ul>
+
+  <div class="cuadro-code">
+    <code>sensor.dist_sensor(distance)  # <-- ¡Toma el dato y envíalo a la red ROS!
+</code>
+  </div>
+
+  <ul>
+    <li><strong>Mantener el ritmo</strong>: En lugar de dormir 1 segundo fijo (<strong>time.sleep(1)</strong>), usamos el ritmo de ROS:</li>
+  </ul>
+
+  <div class="cuadro-code">
+    <code>sensor.r.sleep()
+</code>
+  </div>
+
+</section>
+
+<section>
+
+  <h2 id="sensor-infrarrojo"><strong>SENSOR INFRARROJO</strong></h2>
+<hr class="separador">
+  <h3>1. Cambiar las Herramientas (Los <strong>Imports</strong>)</h3>
+
+  <ul>
+    <li>En el código viejo: Solo necesitabas <strong>GPIO</strong> para leer pines y <strong>time</strong> para esperar.</li>
+    <li>En el código nuevo (<strong>ROS</strong>): Necesitamos enviar texto ("si" o "no"), no números.</li>
+  </ul>
+
+  <pre class="cuadro-code"><code>import rospy                  # <-- El cerebro de ROS
+from std_msgs.msg import String # <-- El tipo de carta: Texto (Palabras)
+</code></pre>
+
+  <h3>2. Instalar el "<strong>Micrófono</strong>" (El <strong>Publisher</strong>)</h3>
+
+  <p>Necesitamos crear el canal de aviso.</p>
+
+  <div class="cuadro-code">
+    <code>self.infra_publisher = rospy.Publisher('/infrarrojo_obstaculo', String, queue_size=1)
+</code>
+  </div>
+
+  <ul>
+    <li><strong>self.infra_publisher</strong> = ...: Creamos el objeto micrófono.</li>
+    <li><strong>'/infrarrojo_obstaculo'</strong>: Es el nombre del canal (Topic). Un nodo de navegación se suscribirá aquí. Si escucha un "si", sabrá que debe detener los motores.</li>
+    <li><strong>String</strong>: El idioma. Prometemos enviar palabras ("si", "no"), no códigos raros.</li>
+  </ul>
+
+  <h3>3. Crear el "<strong>Mensajero</strong>" (La función <strong>infra_mesaje</strong>)</h3>
+
+  <p>
+    Esta es la función que empaqueta la palabra y la envía.
+  </p>
+
+  <pre class="cuadro-code"><code>def infra_mesaje(self, mesaje):
+    mesaje_infra = String()       # 1. Cogemos un sobre vacío tipo "String" (Texto)
+    mesaje_infra.data = mesaje    # 2. Metemos la palabra ("si" o "no") dentro
+    self.infra_publisher.publish(mesaje_infra) # 3. Enviamos el sobre por el microfono
+</code></pre>
+
+  <h3>4. La <strong>Lobotomía</strong> (El bucle principal)</h3>
+
+  <p>
+    <strong>La lógica de los sensores Infrarrojos:</strong> Estos sensores suelen funcionar "al revés" (<strong>Active Low</strong>).
+  </p>
+
+  <ul>
+    <li>Si detectan obstáculo (luz rebota) -> Envían <strong>0 (False)</strong>.</li>
+    <li>Si está libre (luz se pierde) -> Envían <strong>1 (True)</strong>.</li>
+  </ul>
+
+  <pre class="cuadro-code"><code>DR_status = gpio.input(DR) # Ojo derecho
+DL_status = gpio.input(DL) # Ojo izquierdo
+</code></pre>
+
+  <p><strong>Tomar la decisión:</strong></p>
+
+  <pre class="cuadro-code"><code>
+if((DL_status == 0) or (DR_status == 0)): # Si CUALQUIERA de los dos ve algo (es 0)
+     obstaculo = "si"
+else:
+     obstaculo = "no"
+</code></pre>
+
+  <div class="cuadro-code">
+    <code>sensor.infra_mesaje(obstaculo) # <-- Envía "si" o "no" a la red ROS
+</code>
+  </div>
+
+  <p><strong>Pulso:</strong></p>
+
+  <div class="cuadro-code">
+    <code>sensor.r.sleep() # Mantiene el pulso estable a 15Hz
+</code>
+  </div>
+
+</section>
+
+<section>
+
+  <h2 id="led"><strong>LED</strong></h2>
+<hr class="separador">
+  <p>
+    Esta parte es interesante porque aquí pasamos de ser el que habla (<strong>Publisher</strong>) a ser el que escucha (<strong>Subscriber</strong>).
+    <br>
+    Este código no genera datos, <strong>reacciona a ellos</strong>.
+  </p>
+
+  <h3>1. Cambiar las Herramientas (Los <strong>Imports</strong>)</h3>
+
+  <ul>
+    <li>
+      En un código viejo : Habrías importado la librería de los <strong>LEDs</strong> y la del <strong>control remoto</strong> aquí mismo. Todo mezclado.
+    </li>
+    <li>
+      En el código nuevo (<strong>ROS</strong>):
+    </li>
+  </ul>
+
+  <p><strong>AÑADIMOS:</strong></p>
+
+  <pre class="cuadro-code"><code>import rospy                  # <-- Para escuchar la red
+from std_msgs.msg import Int32 # <-- El tipo de carta que esperamos recibir (Enteros)
+import subprocess             # <-- Herramienta para abrir otros programas
+</code></pre>
+
+  <h3>3. Instalar la "<strong>Oreja</strong>" (El <strong>Subscriber</strong>)</h3>
+
+  <p>
+    En lugar de un <strong>Publisher</strong>, usamos un <strong>Subscriber</strong>.
+  </p>
+
+  <div class="cuadro-code">
+    <code>rospy.Subscriber('/remoto_valor', Int32, ColorLed)
+</code>
+  </div>
+
+  <ul>
+    <li>
+      <strong>'/remoto_valor'</strong>: "Quiero escuchar la emisora de radio llamada 'remoto_valor'". 
+      (Es el mismo nombre donde publica tu nodo del control remoto).
+    </li>
+    <li>
+      <strong>Int32</strong>: "Solo entiendo mensajes que sean números enteros".
+    </li>
+    <li>
+      <strong>ColorLed</strong>: "Cada vez que llegue un mensaje nuevo, despierta a la función llamada ColorLed y dale el mensaje".
+    </li>
+  </ul>
+
+  <h3>4. La <strong>Reacción</strong> (La función <strong>ColorLed</strong>)</h3>
+
+  <p>
+    Esta función solo se activa <strong>cuando llega un mensaje</strong>.
+  </p>
+
+  <pre class="cuadro-code"><code>def ColorLed(msg):
+    remoto = msg.data  # 1. Abrimos el sobre y sacamos el número
+    
+    if remoto == 68:   # 2. Si el número es 68 (Botón VOL-) Usamos Delegacion, abrimos una terminal nueva.
+        command = "... sudo python3 Led_ROJO.py"
+        subprocess.Popen(...) 
+</code></pre>
+
+  <p>
+    En lugar de encender el LED directamente, este código <strong>abre una terminal nueva</strong> y ejecuta otro programa (<strong>Led_ROJO.py</strong>).
+  </p>
+
+  <p>
+    Si <strong>Led_ROJO.py</strong> falla o se queda colgado, <strong>no "mata" a tu nodo principal de ROS</strong>.
+  </p>
+
+</section>
+<section>
+  <p>Para visualizar la organización por paquetes en ROS, podremos ver en la sección "Creación de paquetes ROS" un ejemplo práctico con el zumbador.</p>
+</section>
+
+<a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+
+
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

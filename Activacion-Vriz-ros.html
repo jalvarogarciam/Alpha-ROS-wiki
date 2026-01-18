@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Activación de RViz</h1>
+      <p class="page-subtitle">
+        Guía paso a paso para activar y utilizar RViz con ROS
+      </p>
+    </header>
+</div>
+<section>
+<h2 id="primerp">Activación de RViz</h2>
+<hr class="separador">
+
+  <p>
+    Si no tienes <strong>Rviz</strong> instalado:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$ sudo apt install ros-noetic-rviz</code>
+  </div>
+
+  <p>
+    Para ejecutar la <strong>visualización</strong>:
+  </p>
+
+  <ul>
+    <li><strong>Lanza Gazebo</strong> con un mundo.</li>
+    <li>
+      Abre <strong>Rviz</strong> en otra terminal con el comando:
+      <p></p>
+      <div class="cuadro-code">
+        <code>$ rviz</code>
+      </div>
+      <p></p>
+    </li>
+    <li>Configura el <strong>"Fixed Frame"</strong> a <strong>odom</strong>.</li>
+    <p></p>
+    <img src="Fotos-wiki\fixedframepng.png" alt="Configuración Fixed Frame" height="400px" width="auto">
+    <p></p>
+    <li>
+      Añade <strong>"RobotModel"</strong> y <strong>"LaserScan"</strong> (Topic: <strong>/scan</strong>) desde el botón <strong>Add</strong>,
+      (Robot Model nos permite cargar el <strong>modelo de robot</strong> que vayamos a utilizar y LaserScan es un tipo de Display para mostrar
+      datos provenientes de <strong>sensores LIDAR 2D planos</strong>, los muestra mediante una <strong>nube de puntos</strong>).
+    </li>
+    <div class="contenedor">
+    <img src="Fotos-wiki\robotmodel.png" alt="Añadir RobotModel y LaserScan" height="350px" width="auto">
+    <img src="Fotos-wiki\laserscan.png" alt="Configuración LaserScan" height="350px" width="auto">
+    <p></p>
+    <img src="Fotos-wiki\topic-scan.png" alt="Visualización final en RViz" height="300px" width="auto">
+ </div>
+ </ul>
+
+  <p>
+    Si el robot aparece en <strong>blanco</strong> y <strong>RobotModel en rojo (error)</strong>, ejecuta en una nueva terminal:
+  </p>
+  <img src="Fotos-wiki\ros-publisher.png" alt="Error RobotModel" height="300px" width="auto">
+
+  <div class="cuadro-code">
+    <code>$ rosrun robot_state_publisher robot_state_publisher</code>
+  </div>
+
+  <p>
+    Guardamos la configuración por ejemplo en el <strong>escritorio</strong>, 
+    <strong>File → Save as</strong>, y escribimos el nombre que queramos, por ejemplo, 
+    <strong>mi_simulacion_robot</strong>
+  </p>
+
+  <p>
+    Si queremos volver a abrir esta configuración tendremos que abrir una nueva terminal y escribir:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$ rviz -d [ruta donde se encuentre el archivo de la configuración]</code>
+  </div>
+
+  <p>
+    En caso de que al abrirlo nos salga el robot en <strong>blanco</strong> abrimos una nueva terminal y ejecutamos:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$ rosrun robot_state_publisher robot_state_publisher</code>
+  </div>
+
+</section>
+<section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+
+</div>
+ <footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+</body>
+</html>

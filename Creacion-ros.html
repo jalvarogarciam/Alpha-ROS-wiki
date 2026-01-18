@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Creación workspace y paquetes ROS</h1>
+      <p class="page-subtitle">
+        Guía Práctica: Creación de un Workspace y Paquetes
+      </p>
+    </header>
+    </div>
+
+  <section>
+  <h2 id="primerp">Guía Práctica: Creación de un Workspace y Paquetes</h2>
+<hr class="separador">
+  <p>
+    Guía Práctica: Creación de un Workspace y Paquetes
+    Para empezar a escribir nuestro propio código, primero debemos crear un entorno de trabajo estructurado.
+  </p>
+
+  <h3>Creación de un Workspace</h3>
+
+  <p>
+    Un workspace (o espacio de trabajo) es la carpeta principal donde organizarás, desarrollarás y compilarás todos tus proyectos de ROS.
+  </p>
+
+  <p>Pasos para crear un workspace:</p>
+
+  <ul>
+    <li>
+      Crear la estructura de directorios. catkin (el sistema de compilación de ROS 1) necesita una carpeta src donde irá todo tu código fuente.
+
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+mkdir -p ~/catkin_ws/src
+        </code></pre>
+      </div>
+      <p></p>
+    </li>
+
+    <li>
+      Compilar el workspace por primera vez. Navega a la raíz del workspace y ejecuta catkin_make. Esto creará las carpetas build y devel.
+
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+cd ~/catkin_ws/
+catkin_make
+        </code></pre>
+      </div>
+      <p></p>
+    </li>
+
+    <li>
+      Añadir el workspace al entorno de la terminal. Para que ROS encuentre los paquetes que crees, debes "cargar" la configuración del workspace. Lo añadimos a .bashrc para que se haga automáticamente en cada nueva terminal.
+
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+        </code></pre>
+      </div>
+      <p></p>
+    </li>
+  </ul>
+
+  <h3>Creación de un Paquete</h3>
+
+  <p>
+    Los paquetes son los contenedores de nuestro código. Siempre deben crearse dentro del directorio src del workspace.
+  </p>
+
+  <p>Pasos para crear un paquete:</p>
+
+  <ul>
+    <li>
+      Navegar al directorio: cd ~/catkin_ws/src .
+
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+cd ~/catkin_ws/src
+        </code></pre>
+      </div>
+      <p></p>
+    </li>
+
+    <li>
+      Usar el comando catkin_create_pkg. Debes especificar un nombre para el paquete y una lista de otros paquetes de los que dependerá.
+
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+catkin_create_pkg &lt;nombre_del_paquete&gt; [dependencia1] [dependencia2] …
+        </code></pre>
+      </div>
+      <p></p>
+    </li>
+
+    <li>
+      Ejemplo práctico:
+
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+catkin_create_pkg alphabot2_driver std_msgs rospy roscpp
+        </code></pre>
+      </div>
+      <p></p>
+    </li>
+
+    <li>
+      Compilar el workspace de nuevo. Tras crear o modificar un paquete, siempre debes volver a la raíz del workspace y compilar.
+
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+cd ~/catkin_ws/
+catkin_make
+        </code></pre>
+      </div>
+      <p></p>
+    </li>
+  </ul>
+
+</section>
+
+
+<section>
+  <h2>Programación de un Nodo Básico</h2>
+  <hr class="separador">
+
+  <p>
+    Programación de un Nodo Básico
+    Para que un fichero de código (por ejemplo, en C++) se convierta en un nodo ejecutable de ROS, es necesario declararlo en el fichero CMakeLists.txt del paquete.
+  </p>
+
+  <h3>Editar CMakeLists.txt :</h3>
+
+  <p>
+    Deberás añadir o descomentar las líneas que le dicen al compilador cómo construir el ejecutable.
+  </p>
+
+  <p></p>
+  <div class="cuadro-code">
+    <pre><code>
+# Declara un nuevo ejecutable llamado "nombre_del_nodo"
+# a partir del fichero fuente "mi_codigo.cpp"
+add_executable(${PROJECT_NAME}_node src/mi_codigo.cpp)
+# Enlaza el ejecutable con las librerías de catkin y otras dependencias
+target_link_libraries(${PROJECT_NAME}_node
+  ${catkin_LIBRARIES}
+)
+    </code></pre>
+  </div>
+  <p></p>
+
+  <h3>Crear el archivo de código fuente:</h3>
+
+  <p>
+    Crea el fichero (ej. mi_codigo.cpp) dentro del directorio src de tu paquete y escribe la lógica de tu nodo.
+  </p>
+
+  <h3>Compilar:</h3>
+
+  <p>
+    Como siempre, vuelve a la raíz del workspace (cd ~/catkin_ws/) y ejecuta catkin_make. Si todo va bien, tu nuevo nodo estará listo para ser ejecutado con rosrun.
+  </p>
+
+</section>
+
+<section>
+  <h2>Organización por Paquetes en ROS</h2>
+  <hr class="separador">
+  <p>
+    <strong>Ejemplo Práctico:</strong> El sistema de Sonido (<strong>buzzer_pkg</strong>)<br>
+    Como vimos anteriormente, en ROS, el software se organiza en <strong>Paquetes (Packages)</strong>. 
+    Para entenderlo, hemos creado el paquete <strong>buzzer_pkg</strong>, encargado de reproducir la "Marcha Imperial".
+  </p>
+
+  <h3>Paso 1: Generación de la estructura</h3>
+  <p>
+    Navegamos a la carpeta de código fuente del espacio de trabajo y usamos el comando <strong>catkin_create_pkg</strong>. 
+    Indicamos el nombre del paquete y las dependencias (librerías) que usará:
+  </p>
+  <ul>
+    <li><strong>rospy:</strong> Librería de Python para ROS.</li>
+    <li><strong>std_msgs:</strong> Mensajes estándar (textos, números, booleanos).</li>
+  </ul>
+
+  <div class="cuadro-code">
+    <pre> <code>cd ~/ros_catkin_ws/src
+catkin_create_pkg buzzer_pkg rospy std_msgs</code></pre>
+  </div>
+
+  <h3>Paso 2: Creación del Script (El Nodo)</h3>
+  <p>
+    Dentro del paquete, en la carpeta <strong>src</strong>, creamos nuestro script de Python. En este caso, <strong>starwars.py</strong>.<br>
+    Es vital que el archivo tenga la declaración <strong>shebang</strong> en la primera línea para que Linux sepa ejecutarlo con Python 3:
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>#!/usr/bin/env python3
+import rospy
+...</code></pre>
+  </div>
+
+  <h3>Paso 3: Permisos de Ejecución</h3>
+  <p>
+    Este es un paso que suele olvidarse y genera errores. Linux crea los archivos "bloqueados" por seguridad. 
+    Debemos dar permiso de ejecución al script:
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>chmod +x ~/ros_catkin_ws/src/buzzer_pkg/src/starwars.py</code></pre>
+  </div>
+
+  <h3>Paso 4: Compilación y Registro</h3>
+  <p>
+    Para que ROS "sepa" que existe este nuevo paquete, debemos compilar el entorno. 
+    Si estamos en la Raspberry Pi, usamos la "Lista Blanca" para compilar solo nuestro paquete y ahorrar tiempo:
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>cd ~/ros_catkin_ws
+catkin_make -DCATKIN_WHITELIST_PACKAGES="buzzer_pkg"
+source devel/setup.bash</code></pre>
+  </div>
+
+  <h3>Paso 5: Ejecución Manual (rosrun)</h3>
+  <p>
+    Para probar un nodo de forma individual, usamos el comando <strong>rosrun</strong>:
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code># rosrun &lt;nombre_paquete&gt; &lt;nombre_script&gt;
+rosrun buzzer_pkg starwars.py</code></pre>
+  </div>
+</section>
+
+
+<section>
+  <h2>Orquestación con Archivos .launch</h2>
+  <hr class="separador">
+  <p>
+    <strong>Ejemplo Práctico:</strong> Coordinación del Siguelíneas (<strong>siguelinea_pkg</strong>)<br>
+    A medida que el proyecto crece, ejecutar los nodos uno a uno en distintas terminales es ineficiente. 
+    Nuestro robot necesita arrancar dos sistemas a la vez:
+  </p>
+
+  <ul>
+    <li><strong>El Piloto:</strong> El algoritmo PID que sigue la línea y detecta obstáculos.</li>
+    <li><strong>La Alarma:</strong> El sistema que toca música cuando recibe el aviso de obstáculo.</li>
+  </ul>
+
+  <p>
+    Para coordinar esto, utilizamos un <strong>Launch File (.launch)</strong>.
+  </p>
+
+  <h3>¿Qué es un .launch?</h3>
+  <p>Es un archivo XML que permite:</p>
+  <ul>
+    <li>Arrancar múltiples nodos con un solo comando.</li>
+    <li>Iniciar automáticamente el <strong>roscore</strong>.</li>
+    <li>Gestionar salidas por pantalla y parámetros.</li>
+  </ul>
+
+  <h3>Estructura de nuestro <em>fiesta.launch</em></h3>
+  <p>Hemos creado el archivo en la carpeta <strong>launch</strong> dentro del paquete <strong>siguelinea_pkg</strong>:</p>
+
+  <div class="cuadro-code">
+    <pre><code>&lt;launch&gt;
+    &lt;!-- Nodo 1: El cerebro del robot (Siguelíneas + Detección) --&gt;
+    &lt;node pkg="siguelinea_pkg" name="piloto_automatico" type="siguelinea_pid.py" output="screen"&gt;
+    &lt;/node&gt;
+
+    &lt;!-- Nodo 2: El sistema de sonido (Escucha alertas) --&gt;
+    &lt;!-- Fíjate que llamamos a un script que está en OTRO paquete (buzzer_pkg) --&gt;
+    &lt;node pkg="buzzer_pkg" name="sistema_audio" type="alerta_starwars.py" output="screen"&gt;
+    &lt;/node&gt;
+&lt;/launch&gt;</code></pre>
+  </div>
+
+  <h3>Explicación de las etiquetas</h3>
+  <ul>
+    <li><strong>pkg:</strong> El nombre del paquete donde está el código.</li>
+    <li><strong>type:</strong> El nombre del archivo .py que queremos ejecutar.</li>
+    <li><strong>name:</strong> El nombre que tendrá el nodo dentro del sistema ROS (útil para depurar).</li>
+    <li><strong>output="screen":</strong> Obliga a que los print o rospy.loginfo salgan por la terminal (si no, se guardan en un log oculto).</li>
+  </ul>
+
+  <h3>Ejecución Automática (roslaunch)</h3>
+  <p>
+    Para encender el robot completo, solo necesitamos un comando. No hace falta abrir el <strong>roscore</strong> antes, 
+    el <strong>launch</strong> se encarga de todo:
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>roslaunch siguelinea_pkg fiesta.launch</code></pre>
+  </div>
+
+  <h3>Resultado de la Integración</h3>
+  <p>
+    Gracias a este sistema, hemos conseguido un comportamiento reactivo complejo:
+  </p>
+  <ul>
+    <li>El nodo Piloto controla los motores.</li>
+    <li>Al detectar un obstáculo, el Piloto publica un mensaje <strong>True</strong> en el tópico <strong>/aviso_obstaculo</strong>.</li>
+    <li>El nodo Audio, que ha sido arrancado por el mismo <strong>.launch</strong>, recibe ese mensaje e inicia la "Marcha Imperial".</li>
+  </ul>
+</section>
+
+ <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+
+</div>
+ <footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+</body>
+</html>

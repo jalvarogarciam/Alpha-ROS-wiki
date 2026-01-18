@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de usuario: Cómo manejar el robot Alphabot2 desde cero</title>
+<link rel="stylesheet" type="text/css" href="interfazpython.css">
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-ROS.html">Acceso wiki ROS</a></li>
+    <li><a href="PRINCIPAL-PYTHON.html">Inicio</a></li>
+    <li><a href="Conoce-robot-py.html">Conoce a tu robot</a></li>
+    <li><a href="Configuracion-inicial-py.html">Configuración inicial</a></li>
+    <li><a href="Conexion-py.html">Conexión y control remoto</a></li>
+    <li><a href="Proyectos-py.html">Ejemplos de proyectos</a></li>
+    <li><a href="contacto-py.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="content" id="content">
+
+  <!-- TÍTULO PRINCIPAL -->
+  <header class="page-header section fade-in">
+    <h1>Conoce a tu robot</h1>
+    <p class="page-subtitle"> 
+      Descubre las características y componentes del Alphabot2
+    </p>
+    
+  </header>
+
+  <!-- INTRODUCCIÓN -->
+  <section>
+    <h2 id="primerp">Introducción</h2>
+     <hr class="separador">
+    <h3>Kit de construcción de robots AlphaBot2 para Arduino/Pi/PiZero</h3>
+    <p>
+      Los kits de robot AlphaBot2-Pi incluyen un chasis (chasis AlphaBot2-Base) y una placa adaptadora AlphaBot2-Pi. El robot es compatible con Raspberry Pi mediante una placa adaptadora AlphaBot2-Pi.
+    </p>
+    <p>
+      Gracias a su diseño modular altamente integrado, el montaje es muy sencillo: solo hay que encajarlo, sin soldar ni cablear. Tras unos minutos de montaje, estará casi listo. Nuestros códigos de demostración de código abierto le ayudarán a empezar rápidamente.
+    </p>
+    <p>
+      Los accesorios pueden variar según el producto. Esta página describe los accesorios compatibles con la placa Raspberry Pi.
+    </p>
+
+    <div class="contenedor">
+      <img src="Fotos-wiki\placa-alphabot.png" alt="Imagen de la placa Raspberry Pi" height="400px" width="auto">
+      <p></p>
+      <div class="cuadro">
+        <ol>
+          <li>Interfaz de control AlphaBot2: para conectar distintos tipos de placas adaptadoras de controlador.</li>
+          <li>Interfaz del módulo ultrasónico</li>
+          <li>Indicadores para evitar obstáculos</li>
+          <li>Rueda omnidireccional</li>
+          <li>ST188: sensor fotoeléctrico infrarrojo reflectivo, para evitar obstáculos</li>
+          <li>ITR20001/T: sensor fotoeléctrico infrarrojo reflectivo, para seguimiento de línea</li>
+          <li>Potenciómetro para ajustar el rango de detección de obstáculos</li>
+          <li>Controlador de motor de doble puente H TB6612FNG</li>
+          <li>Comparador de voltaje LM393</li>
+          <li>Motorreductor micro N20, relación de reducción 1:30, 6 V/600 RPM</li>
+          <li>Ruedas de goma, diámetro 42 mm, ancho 19 mm</li>
+          <li>Interruptor de encendido</li>
+          <li>Portapilas: admite baterías 14500</li>
+          <li>WS2812B: LED RGB de color verdadero</li>
+          <li>Indicador de carga de la batería</li>
+          <li>Puerto de carga de batería USB de 5 V</li>
+          <li>Indicador de encendido</li>
+        </ol>
+      </div>
+    </div>
+    <p></p>
+    <div class="contenedor">
+      <img src="Fotos-wiki\placa-alphabot-arriba.png" alt="Imagen de la placa Raspberry Pi por arriba" height="400px" width="auto">
+      <p></p>
+      <div class="cuadro">
+        <ol>
+          <li>Interfaz de control AlphaBot2: para conectar la base AlphaBot2.</li>
+          <li>Interfaz Raspberry Pi: para conectar Raspberry Pi 3 Modelo B.</li>
+          <li>Interfaz de servo.</li>
+          <li>USB a UART: fácil de controlar la Raspberry Pi mediante UART.</li>
+          <li>LM2596: Regulador de voltaje de 5 V.</li>
+          <li>TLC1543: Chip de adquisición AD de 10 bits, permite que la Raspberry Pi utilice sensores analógicos.</li>
+          <li>PCA9685: controlador de servo, permite una rotación más suave del cabezal panorámico.</li>
+          <li>CP2102: Convertidor USB a UART.</li>
+          <li>Palanca de mando.</li>
+          <li>Receptor de infrarrojos.</li>
+          <li>Zumbador.</li>
+        </ol>
+      </div>
+    </div>
+
+    <p>
+      Asegúrese de haber ensamblado el Alphabot2 de acuerdo con el diagrama de ensamblaje: 
+        <button class="btn-campus" onclick="location.href= 'https://files.waveshare.com/upload/1/1a/Alphabot2-pi-assembly-diagram-en.pdf'">
+        Diagrama ensamblaje Alphabot2
+        </button>
+    </p>
+
+    <p>
+      Montaje del robot: <button class="btn-campus" onclick="location.href='https://youtu.be/ONg0qpxYWQo'">Montaje de Alphabot2</button>
+    </p>
+  </section>
+    <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="text-align: center; padding: 20px; background-color: #1b2838; color: white; margin-top: 20px;">
+    &copy; 2025 Wiki Alphabot2 Python. Todos los derechos reservados.
+  </div>
+</footer>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const content = document.getElementById('content');
+  sidebar.classList.toggle('hidden');
+  content.classList.toggle('expanded');
+}
+</script>
+
+</body>
+</html>

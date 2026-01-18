@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Sistemas de archivos ROS</h1>
+      <p class="page-subtitle">
+        Navegando y comprendiendo la estructura de archivos en ROS
+      </p>
+    </header>
+    </div>
+<section>
+  <h2 id="primerp">El sistema de archivos de ROS</h2>
+<hr class="separador">
+  <p>
+    El sistema de archivos de ROS puede encontrarse documentado en la wiki oficial de ROS en el siguiente enlace:
+    <a href="http://wiki.ros.org/Tutorials/NavigatingTheFilesystem">http://wiki.ros.org/Tutorials/NavigatingTheFilesystem</a>
+   
+  </p>
+
+  <p>
+    Para mantener todo organizado, ROS utiliza un sistema de archivos bien definido basado en paquetes. Entender su estructura es fundamental para saber dónde encontrar los archivos y cómo organizar tu propio código.
+  </p>
+
+  <ul>
+    <li>
+      Paquetes (Packages): Son la principal unidad de organización del software en ROS. Un paquete puede contener nodos (ejecutables), librerías, archivos de configuración, mensajes, servicios y todo lo necesario para que una pieza de software funcione.
+    </li>
+
+    <li>
+      Package Manifest (package.xml): Cada paquete debe incluir este fichero. Contiene los metadatos del paquete: su nombre, versión, autor, licencia y, lo más importante, sus dependencias con otros paquetes.
+    </li>
+  </ul>
+
+  <h3>Comandos para la Navegación</h3>
+
+  <p>
+    ROS proporciona una serie de comandos de terminal para moverte por el sistema de archivos de forma eficiente sin necesidad de conocer las rutas exactas.
+  </p>
+
+  <ul>
+    <li>
+      rospack find [nombre_del_paquete]:  
+      Devuelve la ruta completa al directorio de un paquete. Es muy útil para saber dónde está instalado algo.
+      <p>  </p>
+      <div class="cuadro-code">
+        <pre><code>
+rospack find [nombre_del_paquete]
+        </code></pre>
+      </div>
+    </li>
+
+    <li>
+      roscd [nombre_del_paquete]::  
+      Cambia el directorio actual de la terminal directamente a la carpeta del paquete especificado. Es el comando que más usarás para navegar a tu código.
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+roscd [nombre_del_paquete]
+        </code></pre>
+      </div>
+    </li>
+
+    <li>
+      rosls [nombre_del_paquete]:  
+      Lista los ficheros que hay dentro del directorio de un paquete sin necesidad de navegar hasta él.
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+rosls [nombre_del_paquete]
+        </code></pre>
+      </div>
+    </li>
+  </ul>
+
+</section>
+
+ <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+
+
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

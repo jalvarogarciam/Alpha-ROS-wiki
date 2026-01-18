@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de usuario: Cómo manejar el robot Alphabot2 desde cero</title>
+<link rel="stylesheet" type="text/css" href="interfazpython.css">
+
+</head>
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-ROS.html">Acceso wiki ROS</a></li>
+    <li><a href="PRINCIPAL-PYTHON.html">Inicio</a></li>
+    <li><a href="Conoce-robot-py.html">Conoce a tu robot</a></li>
+    <li><a href="Configuracion-inicial-py.html">Configuración inicial</a></li>
+    <li><a href="Conexion-py.html">Conexión y control remoto</a></li>
+    <li><a href="Proyectos-py.html">Ejemplos de proyectos</a></li>
+    <li><a href="contacto-py.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="content" id="content">
+
+   <header class="page-header section fade-in">
+    <h1>Configuración inicial</h1>
+    <p class="page-subtitle"> 
+      Aprende a configurar tu Alphabot2 para su uso con Raspberry Pi
+    </p>
+    
+  </header>
+    <section>
+      <h2 id="primerp" >Configuración del software</h2>
+       <hr class="separador">
+      <p>
+        Conéctate a la red wifi.
+      </p>
+      <div class="cuadro">
+        <ol>
+            <li>Conecte una pantalla, un teclado y un ratón a la Raspberry Pi y encienda la Raspberry Pi.</li>
+            <li>Conecta la Raspberry Pi a la red Wi-Fi pulsando el icono de Red en la esquina superior derecha de Raspbian.</li>
+            <li>Tras conectarte, pulsa las teclas Ctrl + ALT + T para abrir la terminal de Raspbian.</li>
+            <li>Escribe el comando ifconfig para comprobar la dirección IP de Raspbian.</li>
+        </ol>
+      </div>
+        
+    </section>
+
+    <section>
+        <h2 id="primerp"> Acceso remoto a Raspberry Pi</h2>
+         <hr class="separador">
+          <p>Comenzaremos descargando el software Putty en nuestro PC. Al abrirlo, introduciremos la dirección IP comprobada anteriormente. Una vez tengamos todo a punto, le daremos clic a abrir.
+            Una vez hemos accedido, nos identificaremos en Raspberry Pi con el nombre de usuario predeterminado (pi) y la contraseña (raspberry).</p>
+            <div class="contenedor">
+              <img src="Fotos-wiki\Putty.png"
+              alt="Interfaz de Putty"
+              height="300px"
+              width="auto">
+              <img src="Fotos-wiki\iniciorasp.png"
+              alt="Inicio de sesión de Raspberry"
+              height="250px"
+              width="auto">
+            </div>
+    </section>
+    <section>
+
+        <h2 id="primerp"> Habilitación de interfaces </h2>
+         <hr class="separador">
+          <p>1. Escriba en la terminal de raspberry el comando para abrir raspi-config</p>
+          <p>
+            Tras esto, en el nuevo menú seleccione la opción Interfacing Options.
+          </p> 
+          <div class="contenedor">
+            <img src="Fotos-wiki\configuracioninterfaces.png"
+            alt="Configuración interfaz"
+            height="300px"
+            width="auto">
+            <p></p>
+            <div class="cuadro-code">
+              
+                <code>sudo raspi-config</code>
+             
+            </div>
+            </div>
+          
+          
+          <p>2. Seleccione en las opciones de interfaz la opción cámara, luego confirme dos veces y acepte.
+          </p>
+          <p>3. Seleccione en las opciones de interfaz la opción SPI, confirme y acepte la configuración.</p>
+          <p>4. Seleccione en las opciones de interfaz la opción I2C, confirme y acepte la configuración. </p>
+          <p>5. Seleccione en las opciones de interfaz la opción UART, primero dele a no, luego confirme y por último acepte la configuración. </p>
+          <p>6. Para terminar, seccione finalizar para poder salir. Pulse sí si le requiriese reiniciar; y en caso de que la opción no aparezca puede hacerlo manualmente usando el comando sudo reboot en la terminal raspberry.</p>
+          <p>7. Una vez se reinicia, Putty se desconecta, tan solo acepta y espera a que se reinicie. Una vez listo, haz clic en Putty y seleccione Reiniciar sesión, iniciando de nuevo con las credenciales.</p>
+
+          <img src="Fotos-wiki\restart-putty.png"
+          alt="Reinicio de sesión de Raspberry" height="320px" width="auto">
+           
+
+    </section>
+
+
+    <section>
+      <h2>Configuración con RealVNC Viewer</h2>
+       <hr class="separador">
+      <p>Podremos descargar VNC Viewer en el siguiente enlace: 
+        <a href=" https://www.realvnc.com/es/connect/download/viewer/windows/?lai_vid=MMyd1BVqrcRX&lai_sr=25-29&lai_sl=l&lai_p=1&lai_na=61151">Instalación VNC Viewer</a>
+      </p>
+      <p>
+      Una vez seleccionado nuestro sistema operativo, lo instalaremos y procederemos a configurarlo para
+      conectarnos a Alphabot. Hemos de ver que este esté conectado a nuestra red y, tras ello, descubrir su IP, pudiendo conectar un mini HDMI, un 
+      teclado y un ratón a nuestro robot para tratarlo como un ordenador y facilitar nuestra tarea.</p>
+      <p>
+      Una vez sepamos los datos, abriremos RealVNC Viewer y seleccionaremos la opción Archivo->nueva conexión. Una vez hecho esto, podremos nombrar como queramos
+      esta conexión e introduciremos la IP previamente descubierta. Una vez nos hayamos conectado tendremos que poner el usuario (pi) y su respectiva contraseña (raspberry).
+     </p>
+     <img src="Fotos-wiki\realvnc.png" alt="RealVNC" height="320px" width="auto">
+    </section>
+
+    <section>
+      <h2>Configuración con WinSCP</h2>
+       <hr class="separador">
+      <p> <b>WinSCP</b> (Windows Secure Copy) es un cliente gráfico de código abierto para Windows que permite la transferencia de archivos.</p>
+      <p>Funciona como un <b>puente visual</b> entre el ordenador (Windows) y el "cerebro" de nuestro robot .En lugar de usar comandos complejos en una terminal para mover archivos,
+       WinSCP ofrece una interfaz visual de ventanas.
+      </p>
+      <h3>Manual de uso: Paso a paso</h3>
+      <p>Para conectar al robot, necesitaremos tres datos clave: su dirección IP, su usuario (pi) y su contraseña (raspberry).</p>
+     <div class="cuadro">
+        <ol>
+            <li>Configuración de la Conexión</li>
+            <p>Al abrir WinSCP, verás la ventana de inicio de sesión. Configúrala así:</p>
+            <ul>
+              <li>Protocolo de archivo: Selecciona SFTP (es el estándar seguro que usa el protocolo SSH).</li>
+              <li>Nombre o IP del servidor (Host name): Escribe la dirección IP de tu robot.</li>
+              <li>Número de puerto: Déjalo en 22 (estándar SSH).</li>
+              <li>Usuario y Contraseña: Ingresa las credenciales de tu robot.</li>
+              <li>Guardar: Púlsalo para no escribir esto datos cada vez que abras WinSCP.</li>
+              <li>Haz clic en Conectar.</li>
+            </ul>
+            <p><b>Nota:</b> La primera vez que te conectes, saldrá una advertencia de seguridad sobre una "clave de host"
+               (Host Key). Haz clic en "Sí" para confiar en el robot.</p>
+            <li>Interfaz (Panel doble)</li>
+            <p>Una vez conectado, verás la interfaz clásica de "Comandante":</p>
+            <ul>
+              <li>Panel Izquierdo: Son los archivos de tu ordenador (Local).</li>
+              <li>Panel Derecho: Son los archivos del robot (Remoto).</li>
+            </ul>
+            <p></p>
+            <li>Transferencia de archivos.</li>
+            <p>Será tan simple como arrastrar y soltar.</p>
+            <ul>
+              <li>Para subir al robot: Arrastra un archivo desde la izquierda (tu PC) hacia la derecha (el robot).</li>
+              <li>Para descargar del robot: Arrastra desde la derecha hacia la izquierda.</li>
+            </ul>
+        </ol>
+
+             
+
+      </div>
+    <img src="Fotos-wiki\winscp.png" alt="WinSCP" height="320px" width="auto">
+    
+    </section>
+         <section>
+      <h2>Instalación de bibliotecas</h2>
+       <hr class="separador">
+      <p> Para poder utilizar correctamente el robot, necesitaremos instalar las siguientes bibliotecas. Accediendo a la terminal, ejecutaremos los siguientes comandos:</p>
+      <div class="cuadro-code">
+        <pre>
+          <code>  
+sudo apt-get update
+sudo apt-get install ttf-wqy-zenhei
+sudo apt-get install python-pip
+sudo pip install RPi.GPIO
+sudo pip install spidev
+sudo apt-get install python-smbus
+sudo apt-get install python-serial
+sudo pip install rpi_ws281x
+          </code>
+          </pre>
+      
+      
+        </div>
+        <p></p>
+         <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+        </div>
+  </div>
+
+  
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #1b2838; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Python. Todos los derechos reservados.
+    </div>
+  </footer>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

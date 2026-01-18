@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Instalación de ROS y Ubuntu</h1>
+      <p class="page-subtitle">
+        Guía paso a paso para preparar el entorno de trabajo con ROS Noetic
+      </p>
+    </header>
+</div>
+   
+  <h2 id="primerp">Instalación de ROS y Ubuntu</h2>
+  <hr class="separador">
+
+  <p>
+   
+    Para ponernos manos a la obra, primero tenemos que instalar la distribución de Ubuntu y sobre ella, ROS Noetic Ninjemys.
+    Instalación de Ubuntu 20.04.6 LTS
+    La mejor forma para instalar ésta distribución de ubuntu de forma no local, es instalarla como máquina virtual dentro de nuestro equipo. Para ello, podemos seguir los pasos de la guía de instalación de Ubuntu que podemos encontrar en la web oficial de la Oficina de Software Libre de la UGR, usando la ISO de Ubuntu 20.04.6 que podemos descargar en la web oficial de Ubuntu.
+  </p>
+
+  <p>
+    Instalación de Ros Noetic Ninjemys.
+  </p>
+
+  <h3 id="primerp">Paso 1: Configuración de los Repositorios de Ubuntu</h3>
+
+  <p>El sistema debe estar configurado para aceptar software desde packages.ros.org.</p>
+
+  <ul>
+    <li>
+      1. Añadir el repositorio de ROS.  
+      Ejecuta el siguiente comando en una terminal para añadir el repositorio oficial de ROS a la lista de fuentes de apt.
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+        </code></pre>
+      </div>
+    </li>
+    <p></p>
+    <li>
+      2. Añadir la clave de seguridad.  
+      Esta clave es necesaria para que el gestor de paquetes confíe en el repositorio de ROS.
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+        </code></pre>
+      </div>
+    </li>
+  </ul>
+
+  <h3>Paso 2: Instalación de ROS Noetic</h3>
+
+  <p>
+    Con los repositorios configurados, proceda con la actualización e instalación. Para ello, primero actualizamos el índice de paquetes con 
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>
+sudo apt update
+    </code></pre>
+  </div>
+
+  <p>Llegados a este punto, tenemos varias opciones de versiones a instalar:</p>
+
+  <ul>
+    <li>
+      Si tienes buen espacio y conexión, instala la versión Desktop-Full (recomendada).  
+      Esta versión incluye el núcleo de ROS, herramientas 2D/3D (RViz), simuladores (Gazebo) y librerías de navegación.  
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+sudo apt install ros-noetic-desktop-full
+        </code></pre>
+      </div>
+      <p></p>
+      (Nota: Esta instalación puede tardar varios minutos dependiendo de la conexión a internet y el rendimiento del sistema.)
+    </li>
+
+    <li>
+      Si no, opta por la versión ROS-Base, más ligera y rápida de descargar pero más limitada.
+      <p></p>
+      <div class="cuadro-code">
+        <pre><code>
+sudo apt install ros-noetic-ros-base
+        </code></pre>
+      </div>
+    </li>
+  </ul>
+
+  <p>
+    ROS cuenta con diversidad de paquetes que podemos observar en la web de ROS Index ó usando el comando apt search ros-noetic.  
+    Éstos paquetes pueden ser instalados usando el comando:
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>
+sudo apt install ros-noetic-&lt;NOMBRE_DEL_PAQUETE&gt;
+    </code></pre>
+  </div>
+
+  <h3>Paso 3: Configuración del Entorno</h3>
+
+  <p>
+    Es necesario configurar el entorno de la terminal para que reconozca los comandos de ROS.  
+    Este comando añadirá automáticamente la configuración de ROS al archivo de inicio de la terminal.
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+    </code></pre>
+  </div>
+
+  <h3>Paso 4: Instalación de Dependencias Esenciales (rosdep)</h3>
+
+  <p>
+    Rosdep es una herramienta fundamental que instala automáticamente las dependencias de los paquetes de ROS.  
+    Para instalarla e inicializarla, ejecuta los siguientes comandos:
+  </p>
+
+  <div class="cuadro-code">
+    <pre><code>
+sudo apt install python3-rosdep
+sudo rosdep init
+rosdep update
+    </code></pre>
+  </div>
+
+</section>
+ <section>
+   <p>
+    
+   </p>
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

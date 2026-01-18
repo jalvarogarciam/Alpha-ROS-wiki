@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Introducción a ROS</h1>
+      <p class="page-subtitle">
+        Breve introducción al Robot Operating System (ROS)
+      </p>
+    </header>
+   
+</div>
+    <h2 id="primerp">Introducción a ROS</h2>
+    <hr class="separador">
+    <p>ROS – Robot Operating System es un conjunto de paquetes y herramientas de software para la creación de aplicaciones en robótica.
+</p>
+<p>ROS cuenta con una extensa wiki oficial, pero en inglés. Para facilitar el aprendizaje del mismo, nos hemos basado
+    en su fuente oficial para crear esta guía en español, adaptada al robot Alphabot2. Puedes visitar la wiki oficial de ROS en el siguiente enlace:
+    <a href="http://wiki.ros.org/">http://wiki.ros.org/</a>
+</p>
+  </section>
+
+  <section>
+    <h2>¿Por qué usar ROS con Alphabot2?</h2>
+    <hr class="separador">
+    <p>ROS proporciona una plataforma flexible y modular que facilita el desarrollo de aplicaciones robóticas complejas.
+        Al utilizar ROS con Alphabot2, los usuarios pueden aprovechar una amplia gama de bibliotecas y herramientas para
+        mejorar las capacidades del robot, incluyendo navegación, percepción y control avanzado.
+    </p>
+    </section>
+
+    <section>
+        <h2>Distribuciones de ROS</h2>
+        <hr class="separador">
+        <p>ROS se publica en forma de distribuciones, y cada distribución de ROS está diseñada para funcionar con una y sólo una versión 
+específica de Ubuntu LTS (Long-Term Support). Cada una de estas distribuciones tiene un ciclo de vida para poder mantener ROS 
+al día con los nuevos estándares.</p>
+        
+
+
+    </section>
+
+    
+
+<table>
+    <thead>
+        <tr>
+            <th>Distribución</th>
+            <th>Lanzamiento</th>
+            <th>Fin ciclo de vida</th>
+            <th>Logo</th>
+            <th>Versión de Ubuntu</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Noetic Ninjemys</td>
+            <td>Mayo 2020</td>
+            <td>Mayo 2025</td>
+            <td><img src="Fotos-wiki\noetic.webp" alt="Noetic Ninjemys Logo" width="50px" height="auto"></td>
+            <td>Ubuntu 20.04 LTS</td>
+        </tr>
+        <tr>
+            <td>Melodic Morenia</td>
+            <td>Mayo 2018</td>
+            <td>Mayo 2023</td>
+            <td><img src="Fotos-wiki\melodic_logo.jpg" alt="Melodic Morenia Logo" width="50px" height="auto"></td>
+            <td>Ubuntu 18.04 LTS</td>
+        </tr>
+        <tr>
+            <td>Kinetic Kame</td>
+            <td>Mayo 2016</td>
+            <td>Mayo 2021</td>
+            <td><img src="Fotos-wiki\Kinetic.png" alt="Kinetic Kame Logo" width="50px" height="auto"></td>
+            <td>Ubuntu 16.04 LTS</td>
+        </tr>
+    </tbody>
+</table>
+<p>En nuestro caso, vamos a instalar la distribución ROS Noetic Ninjemys, que funciona con Ubuntu 20.04 LTS y es la última versión para ROS. Incluye Python3, a diferencia de las demás versiones.</p>
+  <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+  <footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+</body>
+</html>
+

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Ejecución final en Gazebo</h1>
+      <p class="page-subtitle">
+        Integrando todo lo aprendido: navegación autónoma y mapeo con TurtleBot3
+      </p>
+    </header>
+</div>
+<section>
+
+<section>
+<div class="cuadro a">
+    <h3>Contenido</h3>
+    <p>Tendremos a mano un menú navegable, puesto que esta sección contiene varios apartados con bastante densidad de código.</p>
+    <ul>
+      <li><a href="#primerp">Ejecución final</a></li>
+      <li><a href="#nuevas">Nuevas funciones en RViz: TF, Odometry y Map</a></li>
+      <li><a href="#ejercicio-final-slam">Ejercicio final: Creación de mapa (SLAM) con navegación autónoma</a></li>
+      <li><a href="#camara-mundo-simulado">Cámara dentro de un mundo simulado</a></li>
+      <li><a href="#ejercicio-rastreo-casa">Ejercicio de rastreo en casa</a></li> 
+    </ul>
+  </div>
+
+<h2 id="primerp">Ejecución final</h2>
+<hr class="separador">
+
+  <p><strong>En una nueva terminal:</strong></p>
+
+  <ul>
+    <li>
+      Prepara la terminal:
+      <p></p>
+      <div class="cuadro-code">
+        <code>$ source ~/catkin_ws/devel/setup.bash</code>
+      </div>
+      <p></p>
+    </li>
+    <li>
+      Ejecuta el programa:
+      <p></p>
+      <div class="cuadro-code">
+        <code>$ rosrun robot_scripts obstacle_avoider.py</code>
+        <p></p>
+      </div>
+    </li>
+  </ul>
+
+  <p>
+    <em>
+ <strong>Explicación:</strong> Ejecuta el script que lee el láser y mueve el robot automáticamente.
+    </em>
+   
+  </p>
+</section>
+
+<section>
+  <h2 id="nuevas"> Nuevas funciones en RViz: TF, Odometry y Map</h2>
+<hr class="separador">
+<div class="cuadro">
+    <p><strong>IMPORTANTE:</strong> Siempre que abras RVIZ, si el robot aparece de color blanco deberás abrir una nueva terminal y escribir:</p>
+
+  <div class="cuadro-code">
+    <code>$ rosrun robot_state_publisher robot_state_publisher</code>
+  </div>
+</div>
+  
+
+  <p>Ahora que ya dominamos el <strong>sensor láser</strong> y el <strong>modelo del robot</strong>, vamos a añadir las tres herramientas profesionales:</p>
+
+  <ul>
+    <li><strong>TF (Transform Frames):</strong> Muestra los ejes de coordenadas (flechas roja, verde y azul) de las ruedas y sensores.</li>
+    <li><strong>Odometry (Odometría):</strong> Dibuja una línea de color tras el robot.</li>
+    <li><strong>Map (Mapa):</strong> Muestra el plano que el robot va construyendo en tiempo real.</li>
+  </ul>
+</section>
+
+  <h3>Configuración paso a paso en RViz</h3>
+
+
+  <ul>
+    <li><strong>Añadir TF:</strong> Add → TF → OK.
+        <ul> <li><strong>Configuración recomendada:</strong> Desmarcar Show Names y ajustar Marker Scale a 0.5.</li></ul>
+       </li>
+    <p>
+    </p>
+    <img src="Fotos-wiki\añadirtf.png" alt="RViz con TF añadido" height="350" style="width:auto;">
+    <p></p>
+    
+    <li><strong>Añadir Odometry:</strong> Add → Odometry → OK. Cambiar el Topic a <strong>/odom</strong>, o no funcionará.</li>
+    <div class="contenedor">
+        <p></p>
+        <img src="Fotos-wiki\añadirodometry.png" alt="RViz con odometry añadido" height="320" style="width:auto;">
+        
+        <img src="Fotos-wiki\odometryodom.png" alt="RViz con Odometry configurado" height="320" style="width:auto;">
+        <p></p>
+      <img src="Fotos-wiki\odometrycolor.png" alt="RViz con TF y Odometry configurados" height="320" style="width:auto;">
+        <p></p>
+    </div>
+    <li><strong>Añadir Map:</strong> Add → Map → OK. Cambiar el Topic a <strong>/map</strong>.</li>
+
+    <div class="contenedor">
+        <p></p>
+        <img src="Fotos-wiki\añadirmap.png" alt="RViz con Map añadido" height="320" style="width:auto;">
+        <img src="Fotos-wiki\topicmap.png" alt="RViz con Map configurado" height="320" style="width:auto;">
+        <p></p>
+       
+
+  </ul>
+
+  
+
+<section>
+
+  <h2 id="ejercicio-final-slam"> Ejercicio final: Creación de mapa (SLAM) con navegación autónoma</h2>
+  <hr class="separador">
+  <p>
+    <strong>SLAM (Simultaneous Localization and Mapping)</strong> es la técnica que permite a un robot construir un mapa de un entorno desconocido y, al mismo tiempo, calcular su posición exacta dentro de él en tiempo real. Es como entrar en una habitación a oscuras: necesitas ir "tocando" las paredes para crear un mapa mental del lugar (Mapeado) mientras cuentas tus pasos para saber dónde estás respecto a la entrada (Localización). Sin SLAM, el robot no podría navegar con precisión ni recordar dónde están los obstáculos.
+En este ejercicio pondremos todo a prueba. Vamos a lanzar el robot, activar su sistema de creación de mapas (SLAM) y ejecutar tu script de Python para que explore el entorno él solo mientras tú ves cómo se dibuja el mapa en RViz.
+
+  </p>
+
+  <p>Necesitarás abrir <strong>4 terminales</strong>:</p>
+
+  <h3>TERMINAL 1: El Entorno (Gazebo)</h3>
+  <p>Cargamos el mundo con obstáculos para que el robot tenga algo que detectar. Escribe:
+</p>
+  <div class="cuadro-code">
+    <code>$ roslaunch turtlebot3_gazebo turtlebot3_world.launch</code>
+  </div>
+
+  <h3>TERMINAL 2: El Mapeado (SLAM)</h3>
+    <p>Activamos el algoritmo Gmapping que crea el mapa. Usamos un comando especial para que no abra RViz automáticamente, ya que queremos configurarlo nosotros a mano.
+ 
+    Primero define el robot (No es necesario si lo tienes configurado en ./bashrc)
+  </p>
+  <div class="cuadro-code">
+    <code>$ export TURTLEBOT3_MODEL=burger</code>
+  </div>
+  <p>Luego lanza el mapeado:</p>
+  <div class="cuadro-code">
+    <code>$ roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping open_rviz:=false</code>
+  </div>
+
+  <h3>TERMINAL 3: La Visualización (RViz)</h3>
+  <p>Abre RViz para ver el mapa que se va creando en tiempo real:</p>
+  <div class="cuadro-code">
+    <code>$ rviz</code>
+  </div>
+  <p>Ahora, configura las capas tal y como hemos aprendido, siguiendo este orden estricto:</p>
+  <ul>
+    <li>En Global options, cambia el Fixed Frame escribiendo <strong>map</strong> (esto es vital para el mapeado)</li>
+    <img src="Fotos-wiki\fixedframe-map.png" alt="Configuración Fixed Frame en RViz" height="350" style="width:auto;">
+    <li>Añade RobotModel (Topic: /robot_description). (Activacion de Rviz)</li>
+    <li>Añade LaserScan (Topic: /scan). (Activacion de Rviz)</li>
+    <li>Añade TF (Topic por defecto).(Funciones clave TF, Odometry, map)</li>
+    <li>Añade Odometry (Topic: /odom).(Funciones clave TF, Odometry, map)</li>
+    <li>Añade Map (Topic: /map).(Funciones clave TF, Odometry, map)</li>
+  </ul>
+    <p>Si el robot nos aparece en blanco entonces tendremos que abrir una nueva terminal y escribir </p>
+  <div class="cuadro-code">
+    <code>$ rosrun robot_state_publisher robot_state_publisher</code>
+  </div>
+  <p>Una vez configurado todo podemos guardar esta configuración que la llamaremos slam por ejemplo, siempre que queramos ejecutarlo escribiremos el comando</p>
+  <div class="cuadro-code"><pre>
+    <code>
+$ rviz -d [ubicación del archivo] 
+Ejemplo:
+$ rviz -d ~/Desktop/slam.rviz
+    </code>
+  </pre>
+    
+  </div>
+
+  <h3>TERMINAL 4: El Cerebro (Tu Script)</h3>
+  <p>Por último, ejecutamos el código que creaste para evitar obstáculos.
+  Carga el entorno:</p>
+  <div class="cuadro-code">
+    <code>$ source ~/catkin_ws/devel/setup.bash</code>
+  </div>
+<p>Y ejecuta tu script:</p>
+  <div class="cuadro-code">
+    <code>$ rosrun robot_scripts obstacle_avoider.py</code>
+  </div>
+
+  <h3>RESULTADO</h3>
+
+  <p>
+    Verás al robot moverse solo por la pantalla. Gracias a tu script, esquivará las columnas. En RViz, verás cómo la línea de Odometry marca su camino y, lo más importante, verás aparecer píxeles negros y blancos (Map) a medida que el láser descubre las paredes.</p>
+    <p>¡Felicidades, estás haciendo SLAM autónomo!</p>
+
+  </p>
+
+</section>
+<section>
+  <h2 id="camara-mundo-simulado">Cámara dentro de un mundo simulado</h2>
+  <hr class="separador">
+  <p>En este punto veremos como podemos ver a través de la cámara de nuestro robot en el mundo simulado y haremos un pequeño ejercicio.</p>
+  <p>
+    Primero, deberemos cambiar de modelo de robot para poder acceder a la
+     cámara, ya que turtlebot3 burger (modelo que hemos usado anteriormente) 
+     no posee cámara. Accederemos al .bashrc y cambiaremos el modelo. Para ello ejecutamos en una nueva terminal el siguiente comando:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$ nano ~/.bashrc</code>
+  </div>
+
+  <p>Sustituimos <strong>burger</strong> por <strong>waffle_pi</strong> y ejecutamos:</p>
+  <p></p>
+  <img src="Fotos-wiki\waffle-pi.png" alt="Cambio de modelo en .bashrc" height="350" style="width:auto;">
+  <p></p>
+  <p>Esto servirá para que cada vez que abramos una terminal se exporte directamente el modelo que vamos a usar
+
+Por último escribimos:
+</p>
+  <div class="cuadro-code">
+    <code>$ source ~/.bashrc</code>
+  </div>
+<p> <strong>Con esto se actualizará lo nuevo que hemos escrito y estableceremos 
+  ese archivo como punto de inicio en la ejecución de una terminal. 
+  Por precaución cerraremos esta terminal para confirmar la actualización.
+</strong></p>
+
+<p>Con esto ya tendremos actualizado el modelo a waffle_pi, podemos comprobarlo ejecutando un mundo vacío para ver el nuevo turtlebot3, abrimos una nueva terminal y escribimos
+</p>
+  <div class="cuadro-code">
+    <code>$ roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch</code>
+  </div>
+  <p>Si todo ha salido correctamente, veremos esto en Gazebo:</p>
+  <img src="Fotos-wiki\waffle-gazebo.png" alt="Modelo TurtleBot3 waffle_pi en Gazebo" height="350" style="width:auto;">
+</section>
+
+<section>
+  <h3>Configuración de RViz (Cámara)</h3>
+<p>
+  Antes de empezar con este paso asegúrate de tener Gazebo abierto
+</p>
+<p>
+ Abriremos RViz en una nueva terminal:
+</p>
+  <div class="cuadro-code">
+    <code>$ rviz</code>
+  </div>
+<p>Cambiaremos el Fixed Frame a odom como anterioremente. </p>
+<p>Ahora añadiremos RobotModel como hemos aprendido en los ejercicios anteriores, pulsamos en Add -> RobotModel -> OK
+
+El robot nos aparecera en blanco, solo tenemos que abrir una nueva terminal y escribir
+</p>
+<div class="cuadro-code">
+  <code>$ rosrun robot_state_publisher robot_state_publisher</code>
+</div>
+<p> Con esto ya hemos cargado el modelo waffle_pi en RViz, ahora tendremos que configurar la cámara.
+</p>
+  <p>Para añadir la cámara en rviz tendremos que pulsar  <strong> Add  → Camera  → OK</strong>:</p>
+
+<p>Al hacer esto, nos aparecerá una pequeña cámara debajo de RViz. 
+  Tendremos que indicarle qué cámara queremos ver en el apartado de Image Topic</p>
+  
+  <img src="Fotos-wiki\image-topic.png" alt="Selección de Image Topic" height="320 px" width="auto">
+  <p>Al hacer eso, veremos como cambia la cámara y veremos un cuadrado gris. Si quieres ver cómo funciona la cámara, ponle un cuadrado 
+    delante en el mundo de gazebo y verás como aparece en la cámara</p>
+  <p>Vamos a guardar esta configuración como camara.rviz para la proxima vez que
+     la queramos utilizar podamos usarla directamente solo publicando el estado del robot y escribiendo: </p>
+  <div class="cuadro-code">
+    <code>$ rviz -d [ubicacion del archivo camara.rviz]
+</code>
+  </div>
+  <p>En otra terminal escribiremos: </p>
+    <div class="cuadro-code">
+    <code>$ rosrun robot_state_publisher robot_state_publisher
+</code>
+  </div>
+
+  <p>
+    Una vez hecho todo esto ya tendríamos la cámara configurada, asi que ahora vamos a utilizarla para ver una casa.
+  </p>
+  </section>
+  <section>
+
+  <h2 id="ejercicio-rastreo-casa">Ejercicio de rastreo en casa</h2>
+  <hr class="separador">
+
+<section>
+
+  <p>
+    Para ello necesitamos ejecutar el mundo casa de gazebo asi que abrimos una nueva terminal y ejecutamos:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$ roslaunch turtlebot3_gazebo turtlebot3_house.launch
+</code>
+  </div>
+<p>
+
+</p>
+  <img src="Fotos-wiki\casa.png" alt="Visualización del mapa" width="auto" height="320px">
+
+  <p>
+    Nos cargará este mundo como vimos al principio.
+  </p>
+
+  <p>
+    Lo siguiente será abrir la configuración de RViz. Para ello usamos el último comando que vimos anteriormente en una nueva terminal:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$rviz -d ~/Desktop/camara.rviz (Aparece esta ubicación ya que decidí guardarlo en el escritorio, usa tu propia ruta).
+</code>
+  </div>
+
+  <p>
+    Esto nos abrirá Rviz con la configuración anterior, así que solo tendremos que publicar el estado en una nueva terminal con:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$ rosrun robot_state_publisher robot_state_publisher
+</code>
+  </div>
+
+  <p>
+    Luego de esto tendremos que poder ver las paredes de la casa desde la camara
+  </p>
+
+  <img src="Fotos-wiki\camara-rviz.png" alt="Visualización de la cámara" height="320px" width="auto">
+
+  <p>
+    Ahora vamos a navegar por la casa, por lo que para ello ejecutamos el teleoperador que vimos al principio en una nueva terminal:
+  </p>
+
+  <div class="cuadro-code">
+    <code>$ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+</code>
+  </div>
+
+  <p>
+    Ya tienes libertad absoluta y puedes ver cada rincón de la casa, así que...  ¡Es tu turno de explorar!
+  </p>
+
+  <p>
+    Ahora es tu turno de intentar configurar el waffle_pi para tener la profundidad a la que hemos llegado con burger. Intenta configurar su LaserScan, Odometry, TF...
+  </p>
+
+</section>
+
+
+  
+</section> 
+<a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+
+</div>
+
+ <footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+</body>
+</html>

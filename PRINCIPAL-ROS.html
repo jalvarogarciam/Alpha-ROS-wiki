@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaROS: Guía del estudiante</title>
+  <link rel="stylesheet" href="interfazros.css">
+</head>
+
+<body>
+
+
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+
+<main class="content" id="content">
+
+
+  <section class="hero-section fade-in">
+    <div class="hero-text">
+      <h1 class="page-title">AlphaROS:<br>Guía del estudiante</h1>
+
+      <p class="hero-subtitle">
+        Potenciando el aprendizaje de ROS con Alphabot2
+      </p>
+
+      <button class="btn-campus"
+        onclick="location.href='https://campusvirtual.uca.es/'">
+        Acceso Campus Virtual
+      </button>
+    </div>
+
+    <img src="Fotos-wiki\105140452_SeeedStudio_AlphaBot2RobotKits.webp"
+         alt="Imagen del robot Alphabot2"
+         class="img-robot">
+  </section>
+
+ 
+  <section>
+    <h2 id="primerp">Introducción</h2>
+     <hr class="separador">
+    <p>
+      Este manual está diseñado para guiar a los usuarios principiantes en el manejo del robot Alphabot2.
+      A través de instrucciones claras y detalladas, aprenderás a configurar, controlar y aprovechar al máximo
+      las capacidades de este robot educativo mientras comprendes y asimilas el funcionamiento de ROS.
+    </p>
+
+    <p>
+      Para facilitar el mismo, ofreceremos primero una guía para familiarizarte con este robot mediante Python,
+      lenguaje más conocido y cercano. Una vez domines esa guía, manejarte con ROS será mucho más sencillo.
+    </p>
+  </section>
+
+
+  <section>
+    <h2>Contenido del manual</h2>
+    <hr class="separador">
+    <div class="cuadro">
+      <ul>
+        <li>Introducción a ROS</li>
+        <li>Instalación y configuración inicial ROS</li>
+        <li>Sistema de archivos ROS</li>
+        <li>Conceptos básicos de ROS</li>
+        <li>Creación workspace y paquetes ROS</li>
+        <li>Uso de Alphabot2 con ROS</li>
+        <li>Instalación de Gazebo</li>
+        <li>Prueba de movimiento de robot y otros programas</li>
+        <li>Activación de RViz</li>
+        <li>Ejecución final con ROS</li>
+      </ul>
+    </div>
+  </section>
+
+<section>
+    <h2>Objetivos del manual</h2>
+    <hr class="separador">
+    <p>
+   El aprendizaje de ROS permite a los estudiantes comprender los fundamentos del software robótico moderno y su aplicación en sistemas reales y simulados.
+    Este primer acercamiento facilita el entendimiento de la arquitectura basada en nodos, tópicos, servicios y acciones, así como del modelo de comunicación 
+    distribuida que caracteriza a ROS. A lo largo del proceso formativo, los estudiantes aprenden a preparar el espacio de trabajo y gestionar paquetes,
+     sentando las bases necesarias para el desarrollo de aplicaciones robóticas funcionales.
+</p>
+<p>
+    Asimismo, se introducen conceptos clave como la visualización y simulación mediante herramientas como RViz y Gazebo, que permiten analizar el comportamiento del 
+    robot sin necesidad de hardware físico. Estos conocimientos se consolidan mediante ejercicios prácticos y proyectos guiados, favoreciendo una comprensión 
+    progresiva del sistema. Finalmente, el manual promueve la capacidad de depuración y resolución de problemas habituales en entornos ROS,
+     fomentando el pensamiento crítico, la autonomía y el aprendizaje activo en el ámbito de la robótica y los sistemas inteligentes.
+    </p>
+</section>
+
+  <section>
+    <h2>Acceso guía en lenguaje Python</h2>
+    <hr class="separador">
+    <p>
+      Podrás acceder a la guía de Alphabot2 orientada a Python desde aquí
+      o bien desde el menú lateral para mayor comodidad.
+    </p>
+    <button onclick="location.href='PRINCIPAL-PYTHON.html'">
+      Acceso Alphabot Python
+    </button>
+  </section>
+
+ 
+ 
+
+
+     <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</main>
+
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

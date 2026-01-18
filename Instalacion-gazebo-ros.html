@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Instalación de Gazebo y uso del mismo</h1>
+      <p class="page-subtitle">
+        Guía paso a paso para instalar y utilizar Gazebo con ROS
+        </p>
+    </header>
+</div>
+
+<section>
+  <h2>¿Qué es Gazebo?</h2>
+    <hr class="separador">
+    
+<p>
+  <strong>Gazebo</strong> es un <strong>entorno simulado</strong> que permite el uso de 
+  <strong>gemelos digitales</strong> de distintos robots en una serie de 
+  <strong>mundos</strong> a tu elección, con la posibilidad de crear también tu 
+  propio mundo simulado.
+</p>
+
+<p>
+  Es ideal para la prueba de nuevas funciones para los robots que tengan su 
+  gemelo digital disponible, ya que esto nos permitirá 
+  <strong>trabajar si no tenemos acceso al robot físico</strong> y, por tanto, un 
+  <strong>avance de forma remota</strong>.
+</p>
+
+<p>
+  Es la mejor opción para introducirse en el mundo de la róbotica, ofreciendo 
+  muchas posibilidades de manera 
+  <strong>totalmente gratuita</strong>.
+</p>
+        <h2>Instalación de Gazebo</h2>
+        <hr class="separador">
+  <p>
+    Una vez ya tengamos instalado <strong>ROS Noetic</strong>, el siguiente paso será instalar 
+    <strong>Gazebo</strong> y sus paquetes de simulación. Para ello necesitaremos ejecutar 
+    unos comandos sencillos desde la terminal.
+  </p>
+
+  <h3>1. Instalación de Gazebo</h3>
+
+  <div class="cuadro-code">
+    <code>
+      $ sudo apt install ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control -y
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong> Instala los paquetes esenciales de Gazebo y los controladores necesarios para integrarlo
+      correctamente con ROS Noetic.
+    </em>
+  </p>
+
+  <p>
+    Este comando permitirá instalar <strong>Gazebo</strong> en caso de que no se haya instalado
+    junto a ROS Noetic. Si ya estuviese instalado, únicamente añadirá los 
+    <strong>plugins necesarios</strong>.
+  </p>
+
+  <p>
+    Una vez instalado Gazebo, debemos instalar un robot de pruebas para este entorno.
+    En este caso utilizaremos un <strong>Turtlebot3 modelo Burger</strong>, ya que dispone de
+    sensores de escaneo y es el modelo más utilizado.
+  </p>
+
+  <h3>2. Instalación de Turtlebot3</h3>
+
+  <div class="cuadro-code">
+    <code>
+      $ sudo apt install ros-noetic-turtlebot3 -y
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong>Descarga e instala los paquetes principales del robot Turtlebot3 para poder utilizarlo
+      dentro del sistema.
+    </em>
+  </p>
+
+  <p>
+    Con este comando se instalarán los archivos básicos de <strong>Turtlebot3</strong>,
+    aunque todavía no se ha definido el modelo concreto que se va a utilizar.
+    Antes de ello, es necesario instalar el paquete completo de simulaciones.
+  </p>
+
+  <h3>3. Instalación del paquete de simulación de Turtlebot3</h3>
+
+  <div class="cuadro-code">
+    <code>
+      $ sudo apt install ros-noetic-turtlebot3-simulations -y
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong>Añade los entornos de simulación, mapas y mundos necesarios para probar el Turtlebot3
+      dentro de Gazebo.
+    </em>
+  </p>
+
+  <p>
+    Con esto, ya solo queda especificar el <strong>modelo de Turtlebot3</strong> que se va a utilizar.
+  </p>
+
+  <h3>4. Configuración de Turtlebot3</h3>
+
+  <div class="cuadro-code">
+    <code>
+      $ nano ~/.bashrc
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong>Abre el editor de texto Nano para modificar el archivo de configuración principal
+      de la terminal.
+    </em>
+  </p>
+
+  <p>
+    Accedemos en modo escritura al archivo <strong>~/.bashrc</strong>. Nos desplazamos al final
+    del archivo y añadimos la variable de entorno correspondiente al modelo.
+  </p>
+
+  <h3>5. Modelo Turtlebot3</h3>
+
+  <div class="cuadro-code">
+    <code>
+      $ export TURTLEBOT3_MODEL=burger
+    </code>
+  </div>
+  <p> </p>
+  <img src="Fotos-wiki\Turtlebot-terminal.png" alt="Terminal de turtlebot" height="400px" width="auto">
+  
+  <p>
+    <em>
+      <strong>Explicación: </strong>Define una variable de entorno permanente para que ROS sepa que debe utilizar el modelo
+      <strong>burger</strong> por defecto.
+    </em>
+  </p>
+
+  <p>
+    Por último, es necesario recargar el archivo de configuración para aplicar los cambios:
+  </p>
+
+  <div class="cuadro-code">
+    <code>
+      $ source ~/.bashrc
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong>Recarga la configuración de la terminal inmediatamente sin necesidad de reiniciar el sistema.
+    </em>
+  </p>
+
+</section>
+
+<section >
+
+  <h2>POSIBILIDADES DENTRO DE GAZEBO</h2>
+
+  <p>
+    En este documento veremos <strong>3 entornos</strong> en los que podemos trabajar:
+  </p>
+
+  <h3>A) ENTORNO VACÍO</h3>
+
+  <p>
+    <strong>Ideal si queremos trastear con el robot</strong>, presentarle obstáculos y ver su funcionamiento.
+  </p>
+
+  <div class="cuadro-code">
+    <code>
+      $ roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong>Inicia Gazebo con una simulación vacía y carga el robot Turtlebot3 en el centro del mapa.
+    </em>
+  </p>
+
+  <img src="Fotos-wiki\Gazebo-ini.png" alt="Inicio de Gazebo" height="350px" width="auto">
+
+  <h3>B) MUNDO ESTÁNDAR CON OBSTÁCULOS</h3>
+
+  <p>
+    Es el <strong>mundo principal de Turtlebot3</strong>, incluye paredes, pasillos y objetos sencillos.
+  </p>
+
+  <div class="cuadro-code">
+    <code>
+      $ roslaunch turtlebot3_gazebo turtlebot3_world.launch
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong>Carga el escenario oficial de Turtlebot3 que contiene obstáculos geométricos predefinidos.
+    </em>
+  </p>
+
+  <img src="Fotos-wiki\gazebo-turtle.png" alt="Mundo Turtlebot" height="350px" width="auto">
+
+  <h3>C) MUNDO TIPO CASA</h3>
+
+  <p>
+    Simula un <strong>entorno doméstico completo</strong>. Perfecto para <strong>navegación avanzada</strong>.
+  </p>
+
+  <div class="cuadro-code">
+    <code>
+      $ roslaunch turtlebot3_gazebo turtlebot3_house.launch
+    </code>
+  </div>
+
+  <p>
+    <em>
+      <strong>Explicación: </strong>Ejecuta una simulación completa de una casa con divisiones y muebles.
+    </em>
+  </p>
+  <img src="Fotos-wiki\gazebo-casa.png" alt="Mundo casa" height="350px" width="auto">
+</section>
+
+
+
+<a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaROS: Guía del estudiante</title>
+<link rel="stylesheet" type="text/css" href="interfazros.css">
+
+</head>
+
+<body>
+
+<!-- CABECERA FIJA -->
+<header class="top-header">
+  <div class="header-inner">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Wiki: Alphabot2</h1>
+  </div>
+</header>
+<nav class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="PRINCIPAL-PYTHON.html">Acceso wiki Python</a></li>
+    <li><a href="PRINCIPAL-ROS.html">Inicio</a></li>
+    <li><a href="Introduccion-ros.html">Introducción a ROS</a></li>
+    <li><a href="Instalacion-ros.html">Instalación y configuración inicial ROS</a></li>
+    <li><a href="Sistema-archivos-ros.html">Sistema de archivos ROS</a></li>
+    <li><a href="Conceptos-basicos-ros.html">Conceptos básicos de ROS</a></li>
+    <li><a href="Creacion-ros.html">Creación workspace y paquetes ROS</a></li>
+    <li><a href="Uso-Alphabot-Con-ROS.html">Uso de Alphabot2 con ROS</a></li>
+    <li> <a href="Instalacion-gazebo-ros.html">Instalación de Gazebo</a></li>
+    <li><a href="Prueba-mov-prog-ros.html">Prueba de movimiento de robot y otros programas</a></li>
+    <li><a href="Activacion-Vriz-ros.html">Activación de RViz</a></li>
+    <li><a href="Ejecucion-final-ros.html">Ejecución final con ROS</a></li>
+    <li> <a href="Contacto-ros.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <div class="main-container"> 
+    
+    <header class="page-header section fade-in">
+      <h1>Conceptos básicos de ROS</h1>
+      <p class="page-subtitle">
+        Entendiendo la arquitectura y los componentes fundamentales de ROS
+      </p>
+    </header>
+</div>
+<section>
+  <h2 id="primerp">Conceptos básicos en ROS</h2>
+<hr class="separador">
+  <p>
+
+    Para poder trabajar con ROS, es crucial comprender su arquitectura y los conceptos clave que permiten la comunicación entre las diferentes partes de un robot.  ROS se ejecuta como un sistema distribuido sobre una red LAN.
+  </p>
+
+  <h3>El Núcleo de ROS: Master, Roscore y Rosout</h3>
+
+  <ul>
+    <li>
+      Master (Nodo Máster): Imagina que es el "centro de control" o la "centralita telefónica" de ROS. Su función es permitir que los demás nodos se encuentren y se comuniquen entre ellos. Antes de ejecutar cualquier nodo de tu robot, el Master debe estar en funcionamiento.
+    </li>
+
+    <li>
+      roscore: Es el comando que lanza todo lo necesario para que el sistema base de ROS funcione. Al ejecutar roscore, se inician tres procesos:
+      <ul>
+        <li>El Master.</li>
+        <li>Rosout: un nodo que recoge los mensajes de log y los errores de los demás nodos.</li>
+        <li>El Servidor de Parámetros, una base de datos para la configuración.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Nodos (Nodes)</h3>
+
+  <p>
+    Un nodo es, en esencia, un programa. Es la unidad ejecutable en ROS. Cada nodo se diseña para realizar una tarea específica y concreta. Un sistema robótico complejo se construye a partir de la colaboración de muchos nodos pequeños y especializados.
+  </p>
+
+  <p>
+    <b>Ejemplo:</b> En el Alphabot2, un nodo podría dedicarse exclusivamente a leer los sensores de infrarrojos. Otro nodo se encargaría de controlar los motores. Un tercer nodo podría tomar las lecturas de los sensores (del primer nodo) y decidir a qué velocidad mover los motores (enviando órdenes al segundo nodo).
+  </p>
+
+  <h3>Topics y Messages: Comunicación Continua</h3>
+
+  <ul>
+    <li>
+      Topics: Son los canales o "buses" de comunicación a través de los cuales los nodos intercambian información. Los nodos pueden publicar mensajes en un topic o suscribirse a un topic para recibir los mensajes que otros publican. La comunicación es asíncrona: el que publica no espera una respuesta.
+    </li>
+
+    <li>
+      Messages: Son los paquetes de datos que viajan a través de los topics. Cada topic está asociado a un tipo de mensaje específico (un entero, un texto, una imagen, etc.).
+    </li>
+  </ul>
+
+  <p>
+    <b>Analogía:</b> Un topic es como un canal de televisión. Un nodo publicador es la emisora que transmite continuamente un programa (los mensajes), y los nodos suscriptores son los televisores que, al sintonizar ese canal, reciben el programa.
+  </p>
+
+  <h3>Servicios (Services): Comunicación por Petición</h3>
+
+  <p>
+    <b>Servicios:</b> Son otro mecanismo de comunicación, pero este es síncrono y se basa en un modelo de petición/respuesta (request/reply).
+  </p>
+
+  <p>
+    <b>Funcionamiento:</b> Un nodo (el cliente) llama a un servicio ofrecido por otro nodo (el servidor) y espera bloqueado hasta que el servidor procesa la petición y le devuelve una respuesta. Es una comunicación bidireccional y es ideal para acciones puntuales.
+  </p>
+
+  <p>
+    <b>Ejemplo:</b> Un nodo podría ofrecer un servicio llamado /reset_odometry. Otro nodo podría llamar a este servicio para poner a cero el contador de distancia recorrida del robot.
+  </p>
+
+  <h3>Topic vs Service</h3>
+
+  <table>
+    <tr>
+      <th>Característica</th>
+      <th>Topic</th>
+      <th>Servicio</th>
+    </tr>
+    <tr>
+      <td>Modelo de comunicación</td>
+      <td>Publicar/Suscribir (Asíncrono)</td>
+      <td>Petición/Respuesta (Síncrono)</td>
+    </tr>
+    <tr>
+      <td>Flujo de datos</td>
+      <td>Continuo o periódico</td>
+      <td>Puntual o bajo demanda</td>
+    </tr>
+    <tr>
+      <td>Dirección</td>
+      <td>Unidireccional</td>
+      <td>Bidireccional</td>
+    </tr>
+    <tr>
+      <td>Uso típico</td>
+      <td>Flujo de datos de sensores, estado del robot</td>
+      <td>Ejecutar comandos, consultar datos específicos</td>
+    </tr>
+  </table>
+
+  <h3>Herramientas Avanzadas: Bags y Launch Files</h3>
+
+  <ul>
+    <li>
+      Bag files (.bag) : Son ficheros que permiten grabar todos los mensajes que se publican en uno o varios topics. Son extremadamente útiles para capturar los datos de un experimento y poder reproducirlos más tarde para depurar algoritmos sin necesidad de usar el robot real.
+    </li>
+
+    <li>
+      Launch files (.launch) : Son ficheros de configuración en formato XML que permiten lanzar y configurar múltiples nodos con un solo comando. Son imprescindibles para "arrancar" sistemas robóticos complejos, ya que automatizan el proceso de iniciar todos los componentes de software necesarios.
+    </li>
+  </ul>
+
+</section>
+ <section>
+   
+  <a href="#primerp" class="flecha">↑ Ir al inicio</a>
+  </section>
+</div>
+
+<footer>
+    <div style="text-align: center; padding: 20px; background-color: #550a0a; color: white; margin-top: 20px;">
+      &copy; 2025 Wiki Alphabot2 Ros. Todos los derechos reservados.
+    </div>
+  </footer>
+
+ 
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    sidebar.classList.toggle('hidden');
+    content.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>
