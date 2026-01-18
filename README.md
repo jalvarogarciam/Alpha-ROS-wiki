@@ -4,15 +4,11 @@ Bienvenido al repositorio oficial del material docente para el robot AlphaBot 2.
 
 ## 🎯 ¿Qué encontrarás aquí?
 
-*   📖 **La Wiki:** El código fuente de la web de documentación (HTML/CSS).
-*   🐍 **Scripts Python:** Ejemplos listos para usar (Siguelíneas, Evasión de obstáculos, Cámara, Música).
-*   📦 **Paquetes ROS:** La adaptación del hardware para funcionar con ROS Noetic.
-*   🛠️ **Herramientas:** Guías para la Máquina Virtual y solución de errores comunes.
+*   📖 **La Wiki:** El código fuente de la web de documentación (HTML/CSS) através del cual podras acceder a la wiki. Actualmente solo disponemos del acceso local, pero esperamos poder subirla a internet en un cercano futuro.
 
 ## 🚀 Inicio Rápido
 
-Si eres alumno y quieres acceder a la documentación, visita:
-[LINK_A_TU_GITHUB_PAGES_O_WEB]
+Si eres alumno y quieres acceder a la documentación descarga el repositorio y podras lanzar la web en local.
 
 ## 🎓 Contexto
 
